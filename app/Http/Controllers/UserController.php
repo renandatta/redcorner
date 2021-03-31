@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function index()
     {
+        session(['menu_active' => 'admin.user']);
         return view('user.index');
     }
 
