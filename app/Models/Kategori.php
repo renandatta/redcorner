@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Kategori extends Model
 {
@@ -13,4 +14,10 @@ class Kategori extends Model
         'kode',
         'parent_kode'
     ];
+
+    public function setNamaAttribute($nama)
+    {
+        $this->attributes['nama'] = $nama;
+        $this->attributes['slug'] = Str::slug($nama);
+    }
 }
