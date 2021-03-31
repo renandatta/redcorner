@@ -1,6 +1,15 @@
 @php
 use Illuminate\Support\Facades\Session;
-$fitur_program = $fitur_program ?? array();
+$fitur_program = array(
+    ['url' => 'admin', 'caption' => 'Dashboard', 'icon' => 'home'],
+    ['url' => 'admin.user', 'caption' => 'User', 'icon' => 'user'],
+    ['url' => 'admin.kategori', 'caption' => 'Kategori Produk', 'icon' => 'tag'],
+    ['url' => 'admin.produk', 'caption' => 'Produk', 'icon' => 'box'],
+    ['url' => 'admin.ruangan', 'caption' => 'Ruangan', 'icon' => 'home'],
+    ['url' => 'admin.member', 'caption' => 'Member', 'icon' => 'user'],
+    ['url' => 'admin.jenis_simpanan', 'caption' => 'Jenis Simpanan', 'icon' => 'tag'],
+    ['url' => 'admin.simpanan', 'caption' => 'Simpanan', 'icon' => 'shield'],
+);
 $menu_active = function($route) {
     $menu_active = Session::get('menu_active') ?? '';
     return $menu_active == $route ? ' active show ' : '';
@@ -11,28 +20,12 @@ $sub_menu_active = function($route) {
 };
 @endphp
 <ul class="nav">
-    <li class="nav-item {{ $menu_active('profiles') }}">
-        <a href="{{ has_route('profiles') }}" class="nav-link">
-            <i class="link-icon" data-feather="book"></i>
-            <span class="link-title">Profiles</span>
+    @foreach($fitur_program as $fitur)
+    <li class="nav-item {{ $menu_active($fitur['url']) }}">
+        <a href="{{ has_route($fitur['url']) }}" class="nav-link">
+            <i class="link-icon" data-feather="{{ $fitur['icon'] }}"></i>
+            <span class="link-title">{{ $fitur['caption'] }}</span>
         </a>
     </li>
-    <li class="nav-item {{ $menu_active('clients') }}">
-        <a href="{{ has_route('clients') }}" class="nav-link">
-            <i class="link-icon" data-feather="user"></i>
-            <span class="link-title">Clients</span>
-        </a>
-    </li>
-    <li class="nav-item {{ $menu_active('projects') }}">
-        <a href="{{ has_route('projects') }}" class="nav-link">
-            <i class="link-icon" data-feather="folder"></i>
-            <span class="link-title">Projects</span>
-        </a>
-    </li>
-    <li class="nav-item {{ $menu_active('invoices') }}">
-        <a href="{{ has_route('invoices') }}" class="nav-link">
-            <i class="link-icon" data-feather="file-text"></i>
-            <span class="link-title">Invoices</span>
-        </a>
-    </li>
+    @endforeach
 </ul>
