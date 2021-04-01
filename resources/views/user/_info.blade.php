@@ -19,7 +19,7 @@
                         <i>*) Kosongi apabila tidak diubah</i>
                     </x-form-group>
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-light ml-2" type="button" onclick="init_user()">Cancel</button>
+                    <button class="btn btn-light ml-2" type="button" onclick="init_user()">Back</button>
                     @if(!empty($user))
                         <button class="btn btn-danger float-right" type="button" onclick="delete_user({{ $user->id }})">Delete</button>
                     @endif

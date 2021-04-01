@@ -14,7 +14,7 @@
                         <x-input name="nama" :value="$kategori->nama ?? ''" />
                     </x-form-group>
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-light ml-2" type="button" onclick="init_kategori()">Cancel</button>
+                    <button class="btn btn-light ml-2" type="button" onclick="init_kategori()">Back</button>
                     @if(!empty($kategori))
                         <button class="btn btn-danger float-right" type="button" onclick="delete_kategori({{ $kategori->id }})">Delete</button>
                     @endif

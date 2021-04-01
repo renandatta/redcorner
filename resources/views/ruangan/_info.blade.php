@@ -52,7 +52,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-light ml-2" type="button" onclick="init_ruangan()">Cancel</button>
+                    <button class="btn btn-light ml-2" type="button" onclick="init_ruangan()">Back</button>
                     @if(!empty($ruangan))
                         <button class="btn btn-danger float-right" type="button" onclick="delete_ruangan({{ $ruangan->id }})">Delete</button>
                     @endif
