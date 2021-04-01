@@ -18,7 +18,7 @@ class CreateRuangansTable extends Migration
             $table->string('nama');
             $table->string('slug');
             $table->string('tag')->nullable();
-            $table->double('price')->default(0);
+            $table->double('harga')->default(0);
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

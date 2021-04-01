@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
@@ -50,5 +51,14 @@ Route::prefix('admin')->group(function () {
         Route::post('save', [ProdukController::class, 'save'])->name('admin.produk.save');
         Route::post('delete', [ProdukController::class, 'delete'])->name('admin.produk.delete');
         Route::post('delete_gambar', [ProdukController::class, 'delete_gambar'])->name('admin.produk.delete_gambar');
+    });
+
+    Route::prefix('ruangan')->group(function () {
+        Route::get('/', [RuanganController::class, 'index'])->name('admin.ruangan');
+        Route::post('search', [RuanganController::class, 'search'])->name('admin.ruangan.search');
+        Route::post('info', [RuanganController::class, 'info'])->name('admin.ruangan.info');
+        Route::post('save', [RuanganController::class, 'save'])->name('admin.ruangan.save');
+        Route::post('delete', [RuanganController::class, 'delete'])->name('admin.ruangan.delete');
+        Route::post('delete_gambar', [RuanganController::class, 'delete_gambar'])->name('admin.ruangan.delete_gambar');
     });
 });
