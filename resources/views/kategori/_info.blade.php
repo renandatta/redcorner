@@ -16,7 +16,7 @@
                     <button class="btn btn-primary" type="submit">Save</button>
                     <button class="btn btn-light ml-2" type="button" onclick="init_kategori()">Cancel</button>
                     @if(!empty($kategori))
-                        <button class="btn btn-danger float-right" type="button" onclick="delete_kategori()">Delete</button>
+                        <button class="btn btn-danger float-right" type="button" onclick="delete_kategori({{ $kategori->id }})">Delete</button>
                     @endif
                 </div>
             </div>
@@ -49,7 +49,7 @@
         });
     });
 
-    delete_kategori = () => {
+    delete_kategori = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
