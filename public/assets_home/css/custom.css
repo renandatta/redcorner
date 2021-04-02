@@ -11,6 +11,9 @@
 .pt-5 {
     padding-top: 50px!important;
 }
+.pt-3 {
+    padding-top: 30px!important;
+}
 .header.style7 .form-search-width-category .category {
     width: 200px;
 }
@@ -83,4 +86,15 @@
 }
 .item-banner.style17 .number-price {
     color: #f91100;
+}
+.button.btn-shop-now::before {
+    content: '';
+    border: 1px dashed #fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    pointer-events: none;
 }

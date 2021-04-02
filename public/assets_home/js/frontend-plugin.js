@@ -453,21 +453,21 @@ jQuery(document).ready(function ($) {
     }
 
     // -------------------------newletter-----------------------------
-    function newletter_popup() {
-        var window_size = parseFloat(jQuery('body').innerWidth());
-        window_size += kt_get_scrollbar_width();
-        if (window_size > 991) {
-            if ($('body').hasClass('home-newletter')) {
-                var _content = $('.kt-popup-newsletter');
-                $.magnificPopup.open({
-                    items: {
-                        src: _content,
-                        type: 'inline'
-                    }
-                });
-            }
-        }
-    }
+    // function newletter_popup() {
+    //     var window_size = parseFloat(jQuery('body').innerWidth());
+    //     window_size += kt_get_scrollbar_width();
+    //     if (window_size > 991) {
+    //         if ($('body').hasClass('home-newletter')) {
+    //             var _content = $('.kt-popup-newsletter');
+    //             $.magnificPopup.open({
+    //                 items: {
+    //                     src: _content,
+    //                     type: 'inline'
+    //                 }
+    //             });
+    //         }
+    //     }
+    // }
 
 
 
@@ -697,44 +697,44 @@ jQuery(document).ready(function ($) {
 
 
     // -----------------------------mega-menu------------------
-    kt_resizeMegamenu();
-    function kt_resizeMegamenu() {
-        var window_size = parseFloat(jQuery('body').innerWidth());
-        window_size += kt_get_scrollbar_width();
-        if (window_size > 990) {
-            if ($('.container-wapper .main-menu').length > 0) {
-                var container = $('.main-menu-wapper');
-                if (container != 'undefined') {
-                    var container_width = 0;
-                    container_width = parseFloat(container.innerWidth());
-                    var container_offset = 0;
-                    container_offset = container.offset();
-                    setTimeout(function () {
-                        $('.main-menu .menu-item-has-children').each(function (index, element) {
-                            $(element).children('.mega-menu').css({'width': container_width + 'px'});
-                            var sub_menu_width = parseFloat($(element).children('.mega-menu').outerWidth());
-                            var item_width = parseFloat($(element).outerWidth());
-                            $(element).children('.mega-menu').css({'left': '-' + (sub_menu_width / 2 - item_width / 2) + 'px'});
-                            var container_left = container_offset.left;
-                            var container_right = (container_left + container_width);
-                            var item_left = $(element).offset().left;
-                            var overflow_left = (sub_menu_width / 2 > (item_left - container_left));
-                            var overflow_right = ((sub_menu_width / 2 + item_left) > container_right);
-                            if (overflow_left) {
-                                var left = (item_left - container_left);
-                                $(element).children('.mega-menu').css({'left': -left + 'px'});
-                            }
-                            if (overflow_right && !overflow_left) {
-                                var left = (item_left - container_left);
-                                left = left - ( container_width - sub_menu_width );
-                                $(element).children('.mega-menu').css({'left': -left + 'px'});
-                            }
-                        })
-                    }, 100);
-                }
-            }
-        }
-    }
+    // kt_resizeMegamenu();
+    // function kt_resizeMegamenu() {
+    //     var window_size = parseFloat(jQuery('body').innerWidth());
+    //     window_size += kt_get_scrollbar_width();
+    //     if (window_size > 990) {
+    //         if ($('.container-wapper .main-menu').length > 0) {
+    //             var container = $('.main-menu-wapper');
+    //             if (container != 'undefined') {
+    //                 var container_width = 0;
+    //                 container_width = parseFloat(container.innerWidth());
+    //                 var container_offset = 0;
+    //                 container_offset = container.offset();
+    //                 setTimeout(function () {
+    //                     $('.main-menu .menu-item-has-children').each(function (index, element) {
+    //                         $(element).children('.mega-menu').css({'width': container_width + 'px'});
+    //                         var sub_menu_width = parseFloat($(element).children('.mega-menu').outerWidth());
+    //                         var item_width = parseFloat($(element).outerWidth());
+    //                         $(element).children('.mega-menu').css({'left': '-' + (sub_menu_width / 2 - item_width / 2) + 'px'});
+    //                         var container_left = container_offset.left;
+    //                         var container_right = (container_left + container_width);
+    //                         var item_left = $(element).offset().left;
+    //                         var overflow_left = (sub_menu_width / 2 > (item_left - container_left));
+    //                         var overflow_right = ((sub_menu_width / 2 + item_left) > container_right);
+    //                         if (overflow_left) {
+    //                             var left = (item_left - container_left);
+    //                             $(element).children('.mega-menu').css({'left': -left + 'px'});
+    //                         }
+    //                         if (overflow_right && !overflow_left) {
+    //                             var left = (item_left - container_left);
+    //                             left = left - ( container_width - sub_menu_width );
+    //                             $(element).children('.mega-menu').css({'left': -left + 'px'});
+    //                         }
+    //                     })
+    //                 }, 100);
+    //             }
+    //         }
+    //     }
+    // }
 
     // -----------------count down years months -------------------------------
     function moorabi_countdown() {
@@ -756,16 +756,16 @@ jQuery(document).ready(function ($) {
         moorabi_custom_scrollbar();
     });
     $(window).resize(function () {
-        quickview_popup();
+        // quickview_popup();
         moorabi_masonry()
-        kt_resizeMegamenu();
+        // kt_resizeMegamenu();
         moorabi_remove_class_review();
         moorabi_details_thumd_zoom();
         moorabi_custom_scrollbar();
     });
     $(window).load(function () {
-        newletter_popup();
-        quickview_popup();
+        // newletter_popup();
+        // quickview_popup();
         moorabi_mobile_block();
         moorabi_remove_class_review();
         moorabi_custom_scrollbar()
@@ -777,7 +777,7 @@ jQuery(document).ready(function ($) {
     moorabi_tab_fade_effect();
     moorabi_details_thumd_zoom();
     moorabi_video();
-    kt_resizeMegamenu();
+    // kt_resizeMegamenu();
     moorabi_custom_scrollbar();
     moorabi_countdown();
     moorabi_init_menu_toggle();

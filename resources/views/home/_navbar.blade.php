@@ -1,9 +1,9 @@
 @php
 $menus = array(
     ['url' => '/', 'caption' => 'Home'],
-    ['url' => '/', 'caption' => 'Meeting Room'],
-    ['url' => '/', 'caption' => 'Sembako'],
-    ['url' => '/', 'caption' => 'Tumpeng'],
+    ['url' => 'ruangan', 'caption' => 'Meeting Room'],
+    ['url' => 'sembako', 'caption' => 'Sembako'],
+    ['url' => 'tumpeng', 'caption' => 'Tumpeng'],
 );
 @endphp
 

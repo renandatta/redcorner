@@ -23,9 +23,15 @@ class ProdukRepositories extends Repository {
         $produk = $this->produk->with(['kategori'])
             ->orderBy('id', 'desc');
 
+        $kategori_kode = $request->input('kategori_kode') ?? '';
+        if ($kategori_kode != '')
+            $produk->whereHas('kategori', function ($kategori) use ($kategori_kode) {
+                $kategori->where('kode', 'like', "$kategori_kode%");
+            });
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $produk->paginate($paginate);
-        return $this->produk->get();
+        return $produk->get();
     }
 
     public function find($value, $column = 'id')
@@ -76,6 +82,18 @@ class ProdukRepositories extends Repository {
             ->with(['gambar'])
             ->has('gambar')
             ->latest()->get();
+    }
+
+    public function sembako(Request $request)
+    {
+        $request->merge(['kategori_kode' => $this->kategori_sembako->kode]);
+        return $this->search($request);
+    }
+
+    public function tumpeng(Request $request)
+    {
+        $request->merge(['kategori_kode' => $this->kategori_tumpeng->kode]);
+        return $this->search($request);
     }
 
 }

@@ -20,7 +20,7 @@ class KategoriRepositories extends Repository {
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $kategori->paginate($paginate);
-        return $this->kategori->get();
+        return $kategori->get();
     }
 
     public function find($value, $column = 'id')

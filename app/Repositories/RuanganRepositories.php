@@ -21,7 +21,7 @@ class RuanganRepositories extends Repository {
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $ruangan->paginate($paginate);
-        return $this->ruangan->get();
+        return $ruangan->get();
     }
 
     public function find($value, $column = 'id')

@@ -23,6 +23,10 @@ Route::get('assets/{folder}/{filename}', function ($folder,$filename){
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('/');
+Route::get('ruangan', [HomeController::class, 'ruangan'])->name('ruangan');
+Route::get('sembako', [HomeController::class, 'sembako'])->name('sembako');
+Route::get('tumpeng', [HomeController::class, 'tumpeng'])->name('tumpeng');
+
 Route::post('produk/quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
 
 Route::prefix('admin')->group(function () {

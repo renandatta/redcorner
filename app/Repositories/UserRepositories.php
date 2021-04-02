@@ -20,7 +20,7 @@ class UserRepositories {
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $user->paginate($paginate);
-        return $this->user->get();
+        return $user->get();
     }
 
     public function find($value, $column = 'id')
