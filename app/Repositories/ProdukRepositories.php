@@ -20,8 +20,19 @@ class ProdukRepositories extends Repository {
 
     public function search(Request $request)
     {
-        $produk = $this->produk->with(['kategori'])
+        $produk = $this->produk->with(['kategori', 'gambar'])
             ->orderBy('id', 'desc');
+
+        $id_not = $request->input('id_not') ?? '';
+        if ($id_not != '')
+            $produk = $produk->where('id', '<>', $id_not);
+
+        $is_produk = $request->input('is_produk') ?? '';
+        if ($is_produk != '')
+            $produk = $produk->whereHas('kategori', function ($kategori) {
+                $kategori->where('kode', 'not like', $this->kategori_sembako->kode.'%')
+                    ->where('kode', 'not like', $this->kategori_tumpeng->kode.'%');
+            });
 
         $kategori_kode = $request->input('kategori_kode') ?? '';
         if ($kategori_kode != '')
@@ -93,6 +104,12 @@ class ProdukRepositories extends Repository {
     public function tumpeng(Request $request)
     {
         $request->merge(['kategori_kode' => $this->kategori_tumpeng->kode]);
+        return $this->search($request);
+    }
+
+    public function produk(Request $request)
+    {
+        $request->merge(['is_produk' => '1']);
         return $this->search($request);
     }
 

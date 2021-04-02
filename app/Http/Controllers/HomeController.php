@@ -34,6 +34,13 @@ class HomeController extends Controller
         return view('home.ruangan.index', compact('ruangan', 'title'));
     }
 
+    public function ruangan_detail($slug)
+    {
+        $ruangan = $this->ruangan->find($slug, 'slug');
+        if (empty($ruangan)) return abort(404);
+        return view('home.ruangan.detail', compact('ruangan'));
+    }
+
     public function sembako(Request $request)
     {
         $title = 'Sembako';
@@ -46,6 +53,25 @@ class HomeController extends Controller
         $title = 'Tumpeng';
         $produk = $this->produk->tumpeng($request);
         return view('home.produk.index', compact('produk', 'title'));
+    }
+
+    public function produk(Request $request)
+    {
+        $title = 'Produk';
+        $produk = $this->produk->produk($request);
+        return view('home.produk.index', compact('produk', 'title'));
+    }
+
+    public function produk_detail($slug)
+    {
+        $produk = $this->produk->find($slug, 'slug');
+        if (empty($produk)) return abort(404);
+        $produk_terkait = $this->produk->search(new Request([
+            'kategori_kode' => $produk->kategori->kode,
+            'paginate' => 3,
+            'id_not' => $produk->id
+        ]));
+        return view('home.produk.detail', compact('produk', 'produk_terkait'));
     }
 
     public function produk_quickview(Request $request)

@@ -16,7 +16,7 @@
                                         <span class="number-price">Rp. {{ format_number($ruangan->harga) }}</span>
                                     </div>
                                     <a href="#" class="button btn-shop-now">Reservasi Sekarang</a>
-                                    <a href="#" class="button btn-view-collection">Lihat Detail</a>
+                                    <a href="{{ route('ruangan.detail', $item->slug) }}" class="button btn-view-collection">Lihat Detail</a>
                                 </div>
                             </div>
                         </div>

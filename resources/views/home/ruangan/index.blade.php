@@ -19,7 +19,7 @@
                                 <div class="product-inner equal-element">
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
-                                            <a href="#">
+                                            <a href="{{ route('ruangan.detail', $item->slug) }}">
                                                 @if(count($item->gambar) > 0)
                                                     <img src="{{ asset('assets/' . $item->gambar[0]->file) }}" alt="img">
                                                 @endif
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="product-info">
                                         <h5 class="product-name product_title">
-                                            <a href="#">{{ $item->nama }}</a>
+                                            <a href="{{ route('ruangan.detail', $item->slug) }}">{{ $item->nama }}</a>
                                         </h5>
                                         <div class="group-info">
                                             <div class="price">

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets_home/images/favicon.png') }}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo_corner.png') }}"/>
     <link href="https://fonts.googleapis.com/css?family=Baloo&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900&amp;display=swap"
           rel="stylesheet">

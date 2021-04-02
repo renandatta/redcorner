@@ -6,7 +6,7 @@
     </div>
     <div class="product-thumb">
         <div class="thumb-inner">
-            <a href="#">
+            <a href="{{ route('produk.detail', $item->slug) }}">
                 <img src="{{ asset('assets/' . $item->gambar[0]->file) }}" alt="img">
             </a>
             <div class="thumb-group">
@@ -22,7 +22,7 @@
     </div>
     <div class="product-info">
         <h5 class="product-name product_title">
-            <a href="#">{{ $item->nama }}</a>
+            <a href="{{ route('produk.detail', $item->slug) }}">{{ $item->nama }}</a>
         </h5>
         <div class="group-info">
             <div class="stars-rating">

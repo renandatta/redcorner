@@ -23,11 +23,19 @@ Route::get('assets/{folder}/{filename}', function ($folder,$filename){
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('/');
-Route::get('ruangan', [HomeController::class, 'ruangan'])->name('ruangan');
 Route::get('sembako', [HomeController::class, 'sembako'])->name('sembako');
 Route::get('tumpeng', [HomeController::class, 'tumpeng'])->name('tumpeng');
 
-Route::post('produk/quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
+Route::prefix('produk')->group(function () {
+    Route::get('/', [HomeController::class, 'produk'])->name('produk');
+    Route::get('{slug}', [HomeController::class, 'produk_detail'])->name('produk.detail');
+    Route::post('quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
+});
+
+Route::prefix('ruangan')->group(function () {
+    Route::get('/', [HomeController::class, 'ruangan'])->name('ruangan');
+    Route::get('{slug}', [HomeController::class, 'ruangan_detail'])->name('ruangan.detail');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');

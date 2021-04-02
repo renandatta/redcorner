@@ -2,6 +2,7 @@
 $menus = array(
     ['url' => '/', 'caption' => 'Home'],
     ['url' => 'ruangan', 'caption' => 'Meeting Room'],
+    ['url' => 'produk', 'caption' => 'Produk'],
     ['url' => 'sembako', 'caption' => 'Sembako'],
     ['url' => 'tumpeng', 'caption' => 'Tumpeng'],
 );
