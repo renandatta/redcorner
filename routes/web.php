@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
@@ -38,6 +39,10 @@ Route::prefix('ruangan')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'proses'])->name('admin.login.proses');
+    Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
     Route::get('/', [AdminController::class, 'index'])->name('admin');
 
     Route::prefix('user')->group(function () {

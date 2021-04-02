@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="_token" content="{{ csrf_token() }}">
-{{--    <link rel="shortcut icon" type="image/png" href="{{ asset('lemon.png') }}">--}}
+    <link rel="shortcut icon" type="image/png" href="{{ asset('logo_corner.png') }}">
 
     <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet" />
@@ -31,8 +31,8 @@
 <div class="main-wrapper" id="app">
     <nav class="sidebar">
         <div class="sidebar-header">
-            <a href="#" class="sidebar-brand">
-                Noble<span>UI</span>
+            <a href="#" class="sidebar-brand" style="color: #f91100;">
+                Red<span>Corner</span>
             </a>
             <div class="sidebar-toggler not-active">
                 <span></span>
@@ -49,6 +49,37 @@
             <a href="#" class="sidebar-toggler">
                 <i data-feather="menu"></i>
             </a>
+            <div class="navbar-content">
+                @php($user = \Illuminate\Support\Facades\Auth::user())
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown nav-profile">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ asset('user.png') }}" alt="">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <div class="dropdown-header d-flex flex-column align-items-center">
+                                <div class="figure mb-3">
+                                    <img src="{{ asset('user.png') }}" alt="">
+                                </div>
+                                <div class="info text-center">
+                                    <p class="name font-weight-bold mb-0">{{ $user->nama }}</p>
+                                    <p class="email text-muted mb-3">{{ $user->email }}</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-body">
+                                <ul class="profile-nav p-0 pt-3">
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.logout') }}" class="nav-link">
+                                            <i data-feather="log-out"></i>
+                                            <span>Log Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <div class="page-content">
             @yield('content')

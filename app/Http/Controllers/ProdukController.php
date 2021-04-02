@@ -13,6 +13,7 @@ class ProdukController extends Controller
     protected $produk;
     public function __construct(ProdukRepositories $produk, KategoriRepositories $kategori)
     {
+        $this->middleware('auth');
         $this->produk = $produk;
         view()->share(['list_kategori' => $kategori->dropdown()]);
     }

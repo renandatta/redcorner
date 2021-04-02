@@ -12,6 +12,7 @@ class UserController extends Controller
     protected $user;
     public function __construct(UserRepositories $user)
     {
+        $this->middleware('auth');
         $this->user = $user;
     }
 

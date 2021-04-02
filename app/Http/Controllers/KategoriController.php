@@ -12,6 +12,7 @@ class KategoriController extends Controller
     protected $kategori;
     public function __construct(KategoriRepositories $kategori)
     {
+        $this->middleware('auth');
         $this->kategori = $kategori;
     }
 

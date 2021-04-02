@@ -13,6 +13,7 @@ class RuanganController extends Controller
     protected $ruangan;
     public function __construct(RuanganRepositories $ruangan, KategoriRepositories $kategori)
     {
+        $this->middleware('auth');
         $this->ruangan = $ruangan;
         view()->share(['list_kategori' => $kategori->dropdown()]);
     }
