@@ -86,7 +86,7 @@
         </div>
         <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
             <p class="text-muted text-center text-md-left">
-                Copyright © {{ date('Y') }} <a href="https://renandatta.com" target="_blank">renandatta</a>. All rights reserved
+                Copyright © {{ date('Y') }} <a href="https://renandatta.com" target="_blank">Renandatta</a>. All rights reserved
             </p>
         </footer>
     </div>

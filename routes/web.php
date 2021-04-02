@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\UserController;
@@ -77,5 +78,13 @@ Route::prefix('admin')->group(function () {
         Route::post('save', [RuanganController::class, 'save'])->name('admin.ruangan.save');
         Route::post('delete', [RuanganController::class, 'delete'])->name('admin.ruangan.delete');
         Route::post('delete_gambar', [RuanganController::class, 'delete_gambar'])->name('admin.ruangan.delete_gambar');
+    });
+
+    Route::prefix('member')->group(function () {
+        Route::get('/', [MemberController::class, 'index'])->name('admin.member');
+        Route::post('search', [MemberController::class, 'search'])->name('admin.member.search');
+        Route::post('info', [MemberController::class, 'info'])->name('admin.member.info');
+        Route::post('save', [MemberController::class, 'save'])->name('admin.member.save');
+        Route::post('delete', [MemberController::class, 'delete'])->name('admin.member.delete');
     });
 });
