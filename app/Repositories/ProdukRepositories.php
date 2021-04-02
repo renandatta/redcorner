@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 class ProdukRepositories extends Repository {
 
     protected $produk, $gambar;
-    public function __construct(Produk $produk, GambarProduk $gambar)
+    protected $kategori_tumpeng, $kategori_sembako;
+    public function __construct(Produk $produk, GambarProduk $gambar, KategoriRepositories $kategori)
     {
         $this->produk = $produk;
         $this->gambar = $gambar;
+        $this->kategori_sembako = $kategori->find('Sembako', 'nama');
+        $this->kategori_tumpeng = $kategori->find('Tumpeng', 'nama');
     }
 
     public function search(Request $request)
@@ -61,6 +64,18 @@ class ProdukRepositories extends Repository {
         $gambar = $this->gambar->find($id);
         if (!empty($gambar)) $gambar->delete();
         return $gambar;
+    }
+
+    public function featured_produk()
+    {
+        return $this->produk
+            ->whereHas('kategori', function ($kategori) {
+                $kategori->where('kode', 'not like', $this->kategori_sembako->kode.'%')
+                    ->where('kode', 'not like', $this->kategori_tumpeng->kode.'%');
+            })
+            ->with(['gambar'])
+            ->has('gambar')
+            ->latest()->get();
     }
 
 }

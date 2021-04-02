@@ -62,4 +62,9 @@ class RuanganRepositories extends Repository {
         return $gambar;
     }
 
+    public function ruangan_utama()
+    {
+        return $this->ruangan->latest()->first();
+    }
+
 }

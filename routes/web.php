@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
@@ -21,9 +22,8 @@ Route::get('assets/{folder}/{filename}', function ($folder,$filename){
     return $response;
 });
 
-Route::get('/', function () {
-    return redirect()->route('admin');
-});
+Route::get('/', [HomeController::class, 'index'])->name('/');
+Route::post('produk/quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');

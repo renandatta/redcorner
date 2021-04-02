@@ -101,11 +101,11 @@ class KategoriRepositories extends Repository {
                 ]);
     }
 
-    public function dropdown()
+    public function dropdown($slug = false)
     {
         $result = array();
         $projects = $this->kategori->orderBy('kode')->get();
-        foreach ($projects as $project) $result[$project->id] = $project->nama;
+        foreach ($projects as $project) $result[$slug = true ? $project->slug : $project->id] = $project->nama;
         return $result;
     }
 

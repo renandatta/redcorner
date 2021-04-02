@@ -1,0 +1,86 @@
+.pt-0 {
+    padding-top: 0!important;
+}
+.py-0 {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+.pl-0 {
+    padding-left: 0!important;
+}
+.pt-5 {
+    padding-top: 50px!important;
+}
+.header.style7 .form-search-width-category .category {
+    width: 200px;
+}
+.header.style7 .form-search-width-category .category .chosen-container {
+    width: 200px!important;
+}
+
+.header.style7 .form-search .form-content {
+    max-width: none;
+    border: 2px solid #f91100;
+}
+.header.style7 .form-search-width-category .btn-search {
+    background: #f91100;
+}
+.header.style10 .block-minicart .shopcart-icon, .header.style9 .block-minicart .shopcart-icon, .header.style8 .block-minicart .shopcart-icon, .header.style7 .block-minicart .shopcart-icon {
+    border: 2px dashed #f91100;
+    background-color: #f91100;
+}
+.button, button, input[type="submit"], .load-more a:hover, .moorabi-newsletter.style1 .newsletter-form-wrap .submit-newsletter:hover, .product-item .button:hover, .customer_login input[type="submit"], .sevice-box-content .sevice-button:hover, .footer-device-mobile-item.device-cart .count-icon, .widget_filter_size li.active, .widget_filter_size li:hover, .product-item.style-list .single_variation_wrap > .button:hover, .shoppingcart-content .control-cart .button:hover, .checkout-wrapp .button:hover, .product-item .button.quick-wiew-button:hover, .checkout-wrapp .group-button-payment .btn-credit-card, .payment-method-wrapp .button-control .btn-pay-now, .end-checkout .button, .btn-zoom.open_qv:hover, .attribute_size .list-size a.active, .attribute_size .list-size a:hover, .tab-details-product .tab-link li a::after, .product-item.style2 .group-buttons .button:hover, .product-item.style-2 .group-buttons .added_to_cart:hover, .kt-popup-newsletter.style-2 .mfp-close, .shopcart-description .actions .button-viewcart:hover, .kt-popup-quickview .mfp-close, .moorabi-newsletter.style2 .newsletter-form-wrap .submit-newsletter:hover, .product-item.style-6 .loop-form-add-to-cart .button, .pinmap-buttom, .slider-item .slider-infor .button:hover, .list-category .category-item:hover {
+    background-color: #d41000;
+}
+.button, button, input[type="submit"] {
+    padding: 8px 20px;
+}
+.block-account > a {
+    border: 2px dashed #d41000;
+    background-color: #d41000;
+}
+.header-nav-container {
+    background: #f91100;
+}
+.header-nav-wapper .vertical-wapper {
+    background: #f91100;
+}
+.slider-item .slider-infor .button {
+    background: #f91100;
+}
+.item-banner .banner-content > .button {
+    background: #f91100;
+}
+.header-control {
+    padding-right: 50px;
+}
+.shopcart-description .content-wrap ul {
+    max-height: none;
+    height: 300px;
+}
+.block-minicart .moorabi-submenu {
+    max-width: 400px;
+}
+.mobile-search-box > a {
+    background-color: #d41000;
+}
+.mobile-settings-box > a {
+    background-color: #d41000;
+}
+.header-device-mobile .item .block-sub {
+    padding-top: 30px;
+}
+@media (max-width: 1199px) {
+    .mobile-navigation {
+        background-color: #f91100;
+    }
+}
+.product-item .flash {
+    background-color: #f91100;
+}
+.text-black {
+    color: #000!important;
+}
+.item-banner.style17 .number-price {
+    color: #f91100;
+}
