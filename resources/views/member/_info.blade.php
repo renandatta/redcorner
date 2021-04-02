@@ -21,6 +21,7 @@
                         <x-select name="jenis_kelamin"
                                   :value="$member->jenis_kelamin ?? ''"
                                   :options="$list_jenis_kelamin"
+                                  class="select2"
                         />
                     </x-form-group>
                     <x-form-group id="alamat" caption="Alamat">
@@ -38,6 +39,8 @@
 </div>
 
 <script>
+    init_form_element()
+
     $member_form = $('#member_form');
     $member_form.submit((e) => {
         e.preventDefault();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JenisSimpananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
@@ -86,5 +87,13 @@ Route::prefix('admin')->group(function () {
         Route::post('info', [MemberController::class, 'info'])->name('admin.member.info');
         Route::post('save', [MemberController::class, 'save'])->name('admin.member.save');
         Route::post('delete', [MemberController::class, 'delete'])->name('admin.member.delete');
+    });
+
+    Route::prefix('jenis_simpanan')->group(function () {
+        Route::get('/', [JenisSimpananController::class, 'index'])->name('admin.jenis_simpanan');
+        Route::post('search', [JenisSimpananController::class, 'search'])->name('admin.jenis_simpanan.search');
+        Route::post('info', [JenisSimpananController::class, 'info'])->name('admin.jenis_simpanan.info');
+        Route::post('save', [JenisSimpananController::class, 'save'])->name('admin.jenis_simpanan.save');
+        Route::post('delete', [JenisSimpananController::class, 'delete'])->name('admin.jenis_simpanan.delete');
     });
 });
