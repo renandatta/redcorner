@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MemberRepositories extends Repository {
 
@@ -47,6 +46,14 @@ class MemberRepositories extends Repository {
     {
         $result = array();
         foreach (Member::JENIS_KELAMIN as $item) $result[$item] = $item;
+        return $result;
+    }
+
+    public function dropdown()
+    {
+        $result = array();
+        $data = $this->member->get();
+        foreach ($data as $value) $result[$value->id] = $value->nama;
         return $result;
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\SimpananController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
@@ -95,5 +96,15 @@ Route::prefix('admin')->group(function () {
         Route::post('info', [JenisSimpananController::class, 'info'])->name('admin.jenis_simpanan.info');
         Route::post('save', [JenisSimpananController::class, 'save'])->name('admin.jenis_simpanan.save');
         Route::post('delete', [JenisSimpananController::class, 'delete'])->name('admin.jenis_simpanan.delete');
+    });
+
+    Route::prefix('simpanan')->group(function () {
+        Route::get('/', [SimpananController::class, 'index'])->name('admin.simpanan');
+        Route::post('search', [SimpananController::class, 'search'])->name('admin.simpanan.search');
+        Route::post('info', [SimpananController::class, 'info'])->name('admin.simpanan.info');
+        Route::post('save', [SimpananController::class, 'save'])->name('admin.simpanan.save');
+        Route::post('delete', [SimpananController::class, 'delete'])->name('admin.simpanan.delete');
+
+        Route::post('riwayat/anggota', [SimpananController::class, 'riwayat_anggota'])->name('admin.simpanan.riwayat.anggota');
     });
 });

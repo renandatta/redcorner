@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\JenisSimpanan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class JenisSimpananRepositories extends Repository {
 
@@ -48,6 +47,14 @@ class JenisSimpananRepositories extends Repository {
     {
         $result = array();
         foreach (JenisSimpanan::TIPE as $item) $result[$item] = $item;
+        return $result;
+    }
+
+    public function dropdown()
+    {
+        $result = array();
+        $data = $this->jenisSimpanan->get();
+        foreach ($data as $value) $result[$value->id] = $value->tipe . ' - ' . $value->nama;
         return $result;
     }
 

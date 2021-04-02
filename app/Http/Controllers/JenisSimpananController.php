@@ -32,6 +32,7 @@ class JenisSimpananController extends Controller
     public function info(Request $request)
     {
         $jenis_simpanan = $this->jenisSimpanan->find($request->input('id'));
+        if ($request->has('ajax')) return $jenis_simpanan;
         return view('jenis_simpanan._info', compact('jenis_simpanan'));
     }
 

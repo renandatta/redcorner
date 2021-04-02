@@ -104,8 +104,8 @@ class KategoriRepositories extends Repository {
     public function dropdown($slug = false)
     {
         $result = array();
-        $projects = $this->kategori->orderBy('kode')->get();
-        foreach ($projects as $project) $result[$slug = true ? $project->slug : $project->id] = $project->nama;
+        $data = $this->kategori->orderBy('kode')->get();
+        foreach ($data as $value) $result[$slug == true ? $value->slug : $value->id] = $value->nama;
         return $result;
     }
 
