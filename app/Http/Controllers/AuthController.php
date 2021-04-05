@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepositories;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AdminAuthController extends Controller
+class AuthController extends Controller
 {
-
     protected $user;
     public function __construct(UserRepositories $user)
     {
@@ -19,18 +18,31 @@ class AdminAuthController extends Controller
 
     public function login()
     {
-        return view('auth.admin');
+        return view('auth.login');
     }
 
-    public function proses(AuthRequest $request)
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function login_proses(AuthRequest $request)
     {
         $user = $this->user->find($request->input('email'), 'email');
         if (empty($user) &&
             !Hash::check($request->input('password'), $user->password) &&
-            $user->role == 'Administrator')
-            return redirect()->route('admin.login');
+            $user->role == 'User')
+            return redirect()->route('login');
         Auth::login($user, $request->has('remember'));
-        return redirect()->route('admin');
+        return redirect()->route('/');
+    }
+
+    public function register_proses(RegisterRequest $request)
+    {
+        $request->merge(['role' => 'User']);
+        $user = $this->user->save($request);
+        Auth::login($user, true);
+        return redirect()->route('/');
     }
 
     public function logout()

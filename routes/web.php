@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisSimpananController;
 use App\Http\Controllers\KategoriController;
@@ -29,6 +30,12 @@ Route::get('assets/{folder}/{filename}', function ($folder,$filename){
 Route::get('/', [HomeController::class, 'index'])->name('/');
 Route::get('sembako', [HomeController::class, 'sembako'])->name('sembako');
 Route::get('tumpeng', [HomeController::class, 'tumpeng'])->name('tumpeng');
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('register', [AuthController::class, 'register_proses'])->name('register.proses');
+Route::post('login', [AuthController::class, 'login_proses'])->name('login.proses');
 
 Route::prefix('produk')->group(function () {
     Route::get('/', [HomeController::class, 'produk'])->name('produk');
