@@ -9,12 +9,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    const ROLES = array('Administrator', 'User');
     use HasFactory, Notifiable;
-
     protected $fillable = [
         'nama',
         'email',
-        'password',
+        'role'
     ];
 
     protected $hidden = [

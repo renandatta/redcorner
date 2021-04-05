@@ -45,4 +45,11 @@ class UserRepositories {
         return $user;
     }
 
+    public function list_role()
+    {
+        $result = array();
+        foreach (User::ROLES as $value) $result[$value] = $value;
+        return $result;
+    }
+
 }

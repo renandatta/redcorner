@@ -14,6 +14,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->user = $user;
+        view()->share(['list_role' => $user->list_role()]);
     }
 
     public function index()

@@ -4,6 +4,7 @@
         <th width="5%">No</th>
         <th>Nama</th>
         <th>Username</th>
+        <th>Role</th>
         <th width="10%"></th>
     </tr>
     </thead>
@@ -14,6 +15,7 @@
                 <td>{{ $no++ }}</td>
                 <td class="text-nowrap">{{ $value->nama }}</td>
                 <td class="text-nowrap">{{ $value->email }}</td>
+                <td class="text-nowrap">{{ $value->role }}</td>
                 <td class="py-1 vertical-middle text-center">
                     <button class="btn btn-info py-1 px-2" type="button" onclick="user_info({{ $value->id }})">
                         <i class="mdi mdi-arrow-right text-white"></i>

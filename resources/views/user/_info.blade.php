@@ -18,6 +18,14 @@
                         <x-input name="password" type="password" />
                         <i>*) Kosongi apabila tidak diubah</i>
                     </x-form-group>
+                    <x-form-group id="role" caption="Role">
+                        <x-select
+                            name="role"
+                            class="select2"
+                            :value="$user->role ?? ''"
+                            :options="$list_role"
+                        />
+                    </x-form-group>
                     <button class="btn btn-primary" type="submit">Save</button>
                     <button class="btn btn-light ml-2" type="button" onclick="init_user()">Back</button>
                     @if(!empty($user))
@@ -30,6 +38,8 @@
 </div>
 
 <script>
+    init_form_element();
+
     $user_form = $('#user_form');
     $user_form.submit((e) => {
         e.preventDefault();
