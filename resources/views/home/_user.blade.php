@@ -8,6 +8,7 @@
                 @php($user = \Illuminate\Support\Facades\Auth::user())
                 <div class="text-center">
                     <h5 class="text-center pt-3">{{ $user->nama }}</h5>
+                    <a href="{{ route('wishlist') }}" class="button py-2">Wishlist</a>
                     <a href="{{ route('logout') }}" class="button py-2">Logout</a>
                     <br><br>
                 </div>

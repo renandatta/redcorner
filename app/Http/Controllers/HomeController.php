@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Repositories\KategoriRepositories;
 use App\Repositories\ProdukRepositories;
 use App\Repositories\RuanganRepositories;
+use App\Repositories\WishlistRepositories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    protected $kategori, $ruangan, $produk;
+    protected $kategori, $ruangan, $produk, $wishlist;
     public function __construct(KategoriRepositories $kategori,
                                 RuanganRepositories $ruangan,
-                                ProdukRepositories $produk)
+                                ProdukRepositories $produk,
+                                WishlistRepositories $wishlist)
     {
         $this->kategori = $kategori;
         $this->ruangan = $ruangan;
         $this->produk = $produk;
+        $this->wishlist = $wishlist;
         view()->share(['list_kategori' => $kategori->dropdown(true)]);
     }
 
@@ -79,5 +83,27 @@ class HomeController extends Controller
         $request->validate(['id' => 'required']);
         $produk = $this->produk->find($request->input('id'));
         return view('home.produk._quickview', compact('produk'));
+    }
+
+    public function wishlist()
+    {
+        $wishlist = $this->wishlist->search(new Request([
+            'user_id' => Auth::user()->id
+        ]));
+        return view('home.wishlist', compact('wishlist'));
+    }
+
+    public function wishlist_save(Request $request)
+    {
+        $request->validate(['produk_id' => 'required']);
+        return $this->wishlist->save(new Request([
+            'produk_id' => $request->input('produk_id'),
+            'user_id' => Auth::user()->id
+        ]));
+    }
+
+    public function wishlist_delete(Request $request)
+    {
+        return $this->wishlist->delete($request->input('id'));
     }
 }

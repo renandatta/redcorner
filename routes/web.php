@@ -43,6 +43,12 @@ Route::prefix('produk')->group(function () {
     Route::post('quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
 });
 
+Route::prefix('wishlist')->group(function () {
+    Route::get('/', [HomeController::class, 'wishlist'])->name('wishlist');
+    Route::post('save', [HomeController::class, 'wishlist_save'])->name('wishlist.save');
+    Route::post('delete', [HomeController::class, 'wishlist_delete'])->name('wishlist.delete');
+});
+
 Route::prefix('ruangan')->group(function () {
     Route::get('/', [HomeController::class, 'ruangan'])->name('ruangan');
     Route::get('{slug}', [HomeController::class, 'ruangan_detail'])->name('ruangan.detail');

@@ -46,7 +46,11 @@
                                 <div class="group-button">
                                     <div class="yith-wcwl-add-to-wishlist">
                                         <div class="yith-wcwl-add-button">
-                                            <a href="#">Add to Wishlist</a>
+                                            @if(empty($produk->is_wishlist))
+                                                <a href="javascript:void(0)" onclick="add_wislist({{ $produk->id }})">Add to Wishlist</a>
+                                            @else
+                                                <i class="fa fa-heart"></i> Sudah Di Wishlist
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="quantity-add-to-cart">

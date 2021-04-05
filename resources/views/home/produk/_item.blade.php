@@ -10,9 +10,11 @@
                 <img src="{{ asset('assets/' . $item->gambar[0]->file) }}" alt="img">
             </a>
             <div class="thumb-group">
+                @if(empty($item->is_wishlist))
                 <div class="yith-wcwl-add-to-wishlist">
-                    <div class="yith-wcwl-add-button"><a href="#">Add to Wishlist</a></div>
+                    <div class="yith-wcwl-add-button"><a href="javascript:void(0)" onclick="add_wislist({{ $item->id }})">Add to Wishlist</a></div>
                 </div>
+                @endif
                 <a href="#" class="button quick-wiew-button" produk-id="{{ $item->id }}">Quick View</a>
                 <div class="loop-form-add-to-cart">
                     <button class="single_add_to_cart_button button">Add to cart</button>

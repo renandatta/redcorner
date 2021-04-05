@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="details-infor">
-        <h1 class="product-title">Eclipse Pendant Light</h1>
+        <h1 class="product-title">{{ $produk->nama }}</h1>
         <div class="stars-rating">
             <div class="star-rating"><span class="star-5"></span></div>
             <div class="count-star">(5)</div>
@@ -21,7 +21,13 @@
         <div class="product-details-description"><p>{{ $produk->keterangan }}</p></div>
         <div class="group-button">
             <div class="yith-wcwl-add-to-wishlist">
-                <div class="yith-wcwl-add-button"><a href="#">Add to Wishlist</a></div>
+                <div class="yith-wcwl-add-button">
+                    @if(empty($produk->is_wishlist))
+                        <a href="javascript:void(0)" onclick="add_wislist({{ $produk->id }})">Add to Wishlist</a>
+                    @else
+                        <i class="fa fa-heart"></i> Sudah Di Wishlis
+                    @endif
+                </div>
             </div>
             <div class="quantity-add-to-cart">
                 <div class="quantity">

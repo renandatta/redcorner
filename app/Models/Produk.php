@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Produk extends Model
@@ -30,5 +31,11 @@ class Produk extends Model
     public function gambar()
     {
         return $this->hasMany(GambarProduk::class, 'produk_id', 'id');
+    }
+
+    public function is_wishlist()
+    {
+        return $this->hasOne(Wishlist::class, 'produk_id', 'id')
+            ->where('user_id', Auth::user()->id ?? '');
     }
 }
