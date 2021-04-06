@@ -30,13 +30,7 @@
                 </div>
             </div>
             <div class="quantity-add-to-cart">
-                <div class="quantity">
-                    <div class="control">
-                        <a class="btn-number qtyminus quantity-minus" href="#">-</a><input type="text" data-step="1" data-min="0" value="1" title="Qty" class="input-qty qty" size="4" />
-                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                    </div>
-                </div>
-                <button class="single_add_to_cart_button button">Add to cart</button>
+                <button class="single_add_to_cart_button button" onclick="add_cart({{ $item->id }})">Add to cart</button>
             </div>
         </div>
     </div>

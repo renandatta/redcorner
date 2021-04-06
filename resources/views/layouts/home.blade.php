@@ -64,7 +64,8 @@
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 col-ts-12 pt-5">
                 <div class="header-control">
-                    @include('home._cart')
+                    <div class="block-minicart moorabi-mini-cart block-header moorabi-dropdown" id="list_cart">
+                    </div>
                     @include('home._user')
                     <a class="menu-bar mobile-navigation menu-toggle" href="#">
                         <span></span>
@@ -208,6 +209,50 @@
         @elseauth
             alert('Login dahulu !');
         @endauth
+    }
+    cart_minimalist = () => {
+        let $list_cart = $('#list_cart');
+        $.post("{{ route('cart.minimal') }}", {
+            _token: '{{ csrf_token() }}'
+        }, (result) => {
+            $list_cart.html(result);
+        });
+    }
+    cart_minimalist();
+    add_cart = (produk_id, qty = '') => {
+        @auth
+        $.post("{{ route('cart.save') }}", {
+            _token: '{{ csrf_token() }}', produk_id, qty
+        }, () => {
+            cart_minimalist();
+        }).fail((xhr) => {
+            console.log(xhr.responseText);
+        });
+        @elseauth
+        alert('Login dahulu !');
+        @endauth
+    }
+    delete_cart = (id) => {
+        $.post("{{ route('cart.delete') }}", {
+            _token: '{{ csrf_token() }}', id
+        }, () => {
+            window.location.reload();
+        });
+    }
+    function add_commas(nStr) {
+        nStr += '';
+        let x = nStr.split('.');
+        let x1 = x[0];
+        let x2 = x.length > 1 ? '.' + x[1] : '';
+        let rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + '.' + '$2');
+        }
+        return x1 + x2;
+    }
+    function remove_commas(nStr) {
+        nStr = nStr.replace(/\./g,'');
+        return nStr;
     }
 </script>
 @stack('scripts')

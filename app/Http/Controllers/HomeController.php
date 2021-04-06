@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CartRepositories;
 use App\Repositories\KategoriRepositories;
 use App\Repositories\ProdukRepositories;
 use App\Repositories\RuanganRepositories;
@@ -11,16 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    protected $kategori, $ruangan, $produk, $wishlist;
+    protected $kategori, $ruangan, $produk, $wishlist, $cart;
     public function __construct(KategoriRepositories $kategori,
                                 RuanganRepositories $ruangan,
                                 ProdukRepositories $produk,
-                                WishlistRepositories $wishlist)
+                                WishlistRepositories $wishlist,
+                                CartRepositories $cart)
     {
         $this->kategori = $kategori;
         $this->ruangan = $ruangan;
         $this->produk = $produk;
         $this->wishlist = $wishlist;
+        $this->cart = $cart;
         view()->share(['list_kategori' => $kategori->dropdown(true)]);
     }
 
@@ -105,5 +108,36 @@ class HomeController extends Controller
     public function wishlist_delete(Request $request)
     {
         return $this->wishlist->delete($request->input('id'));
+    }
+
+    public function cart()
+    {
+        $cart = $this->cart->search(new Request([
+            'user_id' => Auth::user()->id
+        ]));
+        return view('home.cart', compact('cart'));
+    }
+
+    public function cart_minimal()
+    {
+        $cart = $this->cart->search(new Request([
+            'user_id' => Auth::user()->id
+        ]));
+        return view('home._cart', compact('cart'));
+    }
+
+    public function cart_save(Request $request)
+    {
+        $request->validate(['produk_id' => 'required']);
+        return $this->cart->save(new Request([
+            'produk_id' => $request->input('produk_id'),
+            'user_id' => Auth::user()->id,
+            'qty' => $request->input('qty') ?? 1
+        ]));
+    }
+
+    public function cart_delete(Request $request)
+    {
+        return $this->cart->delete($request->input('id'));
     }
 }

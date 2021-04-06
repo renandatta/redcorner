@@ -43,10 +43,17 @@ Route::prefix('produk')->group(function () {
     Route::post('quickview', [HomeController::class, 'produk_quickview'])->name('produk.quickview');
 });
 
-Route::prefix('wishlist')->group(function () {
+Route::prefix('wishlist')->middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'wishlist'])->name('wishlist');
     Route::post('save', [HomeController::class, 'wishlist_save'])->name('wishlist.save');
     Route::post('delete', [HomeController::class, 'wishlist_delete'])->name('wishlist.delete');
+});
+
+Route::prefix('cart')->middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'cart'])->name('cart');
+    Route::post('minimal', [HomeController::class, 'cart_minimal'])->name('cart.minimal');
+    Route::post('save', [HomeController::class, 'cart_save'])->name('cart.save');
+    Route::post('delete', [HomeController::class, 'cart_delete'])->name('cart.delete');
 });
 
 Route::prefix('ruangan')->group(function () {

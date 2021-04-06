@@ -17,7 +17,7 @@
                 @endif
                 <a href="#" class="button quick-wiew-button" produk-id="{{ $item->id }}">Quick View</a>
                 <div class="loop-form-add-to-cart">
-                    <button class="single_add_to_cart_button button">Add to cart</button>
+                    <button class="single_add_to_cart_button button" onclick="add_cart({{ $item->id }})">Add to cart</button>
                 </div>
             </div>
         </div>
