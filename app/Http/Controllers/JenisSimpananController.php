@@ -12,7 +12,7 @@ class JenisSimpananController extends Controller
     protected $jenisSimpanan;
     public function __construct(JenisSimpananRepositories $jenisSimpanan)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'user_role']);
         $this->jenisSimpanan = $jenisSimpanan;
         view()->share(['list_tipe' => $jenisSimpanan->dropdown_tipe()]);
     }

@@ -16,7 +16,7 @@ class SimpananController extends Controller
                                 MemberRepositories $member,
                                 JenisSimpananRepositories $jenisSimpanan)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'user_role']);
         $this->simpanan = $simpanan;
         view()->share(['list_member' => $member->dropdown()]);
         view()->share(['list_jenis_simpanan' => $jenisSimpanan->dropdown()]);

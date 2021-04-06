@@ -12,7 +12,7 @@ class MemberController extends Controller
     protected $member;
     public function __construct(MemberRepositories $member)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'user_role']);
         $this->member = $member;
         view()->share(['list_jenis_kelamin' => $member->dropdown_jenis_kelamin()]);
     }

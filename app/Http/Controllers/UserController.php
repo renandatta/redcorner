@@ -12,7 +12,7 @@ class UserController extends Controller
     protected $user;
     public function __construct(UserRepositories $user)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'user_role']);
         $this->user = $user;
         view()->share(['list_role' => $user->list_role()]);
     }
