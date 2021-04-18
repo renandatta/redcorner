@@ -150,13 +150,13 @@
             </a>
         </div>
         <div class="footer-device-mobile-item device-home device-wishlist">
-            <a href="#">
+            <a href="{{ route('wishlist') }}">
                 <span class="icon"><i class="fa fa-heart" aria-hidden="true"></i></span>
                 Wishlist
             </a>
         </div>
         <div class="footer-device-mobile-item device-home device-cart">
-            <a href="#">
+            <a href="{{ route('cart') }}">
                 <span class="icon">
                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                     <span class="count-icon">0</span>
@@ -164,14 +164,16 @@
                 <span class="text">Cart</span>
             </a>
         </div>
+        @guest
         <div class="footer-device-mobile-item device-home device-user">
-            <a href="#">
+            <a href="{{ route('login') }}">
                 <span class="icon">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
                 Account
             </a>
         </div>
+        @endguest
     </div>
 </div>
 <a href="#" class="backtotop">

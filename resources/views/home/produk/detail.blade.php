@@ -62,7 +62,7 @@
                                                 <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                             </div>
                                         </div>
-                                        <button class="single_add_to_cart_button button" onclick="add_cart({{ $item->id }})">Add to cart</button>
+                                        <button class="single_add_to_cart_button button" onclick="add_cart({{ $produk->id }})">Add to cart</button>
                                     </div>
                                 </div>
                             </div>

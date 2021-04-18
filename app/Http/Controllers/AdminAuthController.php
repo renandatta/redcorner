@@ -25,10 +25,10 @@ class AdminAuthController extends Controller
     public function proses(AuthRequest $request)
     {
         $user = $this->user->find($request->input('email'), 'email');
-        if (empty($user) &&
-            !Hash::check($request->input('password'), $user->password) &&
-            $user->role == 'Administrator')
-            return redirect()->route('admin.login');
+        if (empty($user)) return redirect()->route('login');
+        if (!Hash::check($request->input('password'), $user->password))
+            return redirect()->route('login');
+        if ($user->role == 'User') return redirect()->route('login');
         Auth::login($user, $request->has('remember'));
         return redirect()->route('admin');
     }

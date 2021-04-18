@@ -29,12 +29,13 @@ class AuthController extends Controller
     public function login_proses(AuthRequest $request)
     {
         $user = $this->user->find($request->input('email'), 'email');
-        if (empty($user) &&
-            !Hash::check($request->input('password'), $user->password) &&
-            $user->role == 'User')
-            return redirect()->route('login');
+        if (empty($user)) return redirect()->route('login');
+        if (!Hash::check($request->input('password'), $user->password))
+        return redirect()->route('login');
         Auth::login($user, $request->has('remember'));
-        return redirect()->route('/');
+
+        if ($user->role == 'User') return redirect()->route('/');
+        if ($user->role == 'Administrator') return redirect()->route('admin');
     }
 
     public function register_proses(RegisterRequest $request)

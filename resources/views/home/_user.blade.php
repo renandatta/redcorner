@@ -27,7 +27,7 @@
                         <form method="post" class="login form-login" action="{{ route('login.proses') }}">
                             @csrf
                             <p class="form-row form-row-wide">
-                                <input type="email" placeholder="Email" name="email" class="input-text">
+                                <input type="text" placeholder="Email" name="email" class="input-text">
                             </p>
                             <p class="form-row form-row-wide">
                                 <input type="password" class="input-text" name="password" placeholder="Password">
