@@ -104,6 +104,7 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('member')->group(function () {
         Route::get('/', [MemberController::class, 'index'])->name('admin.member');
+        Route::get('cetak/kartu', [MemberController::class, 'cetak_kartu'])->name('admin.member.cetak.kartu');
         Route::post('search', [MemberController::class, 'search'])->name('admin.member.search');
         Route::post('info', [MemberController::class, 'info'])->name('admin.member.info');
         Route::post('save', [MemberController::class, 'save'])->name('admin.member.save');

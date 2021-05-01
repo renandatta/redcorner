@@ -29,6 +29,7 @@ class MemberRepositories extends Repository {
 
     public function save(Request $request)
     {
+        $request = $this->clean_date($request, ['tanggal_lahir']);
         $member = $this->member->find($request->input('id'));
         if (empty($member)) $member = $this->member->create($request->all());
         else $member->update($request->all());
@@ -55,6 +56,17 @@ class MemberRepositories extends Repository {
         $data = $this->member->get();
         foreach ($data as $value) $result[$value->id] = $value->nama;
         return $result;
+    }
+
+    public function auto_no()
+    {
+        $last = $this->member->orderBy('no_member', 'desc')
+            ->first();
+        $no = !empty($last) ? ($last->no_member+1) : 1;
+        for ($i = 1; strlen($no) <= 6; $i++) {
+            $no = '0'.$no;
+        }
+        return $no;
     }
 
 }

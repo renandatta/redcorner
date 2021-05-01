@@ -30,8 +30,13 @@
         let $member_info = $('#member_info'),
             $member_table = $('#member_table');
 
-        search_member = () => {
-            $.post("{{ route('admin.member.search') }}", {_token, paginate}, (result) => {
+        let selected_page = 1;
+        search_member = (page = 1) => {
+            if (page.toString() === '+1') selected_page++;
+            else if (page.toString() === '-1') selected_page--;
+            else selected_page = page;
+
+            $.post("{{ route('admin.member.search') }}?page=" + selected_page, {_token, paginate}, (result) => {
                 $member_table.html(result);
             }).fail((xhr) => {
                 $member_table.html(xhr.responseText);

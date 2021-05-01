@@ -11,19 +11,46 @@
                     <x-form-group id="nama" caption="Nama">
                         <x-input name="nama" :value="$member->nama ?? ''" />
                     </x-form-group>
-                    <x-form-group id="nik" caption="NIK">
-                        <x-input name="nik" :value="$member->nik ?? ''" />
-                    </x-form-group>
-                    <x-form-group id="notelp" caption="No.Telp">
-                        <x-input name="notelp" :value="$member->notelp ?? ''" />
-                    </x-form-group>
-                    <x-form-group id="jenis_kelamin" caption="Jenis Kelamin">
-                        <x-select name="jenis_kelamin"
-                                  :value="$member->jenis_kelamin ?? ''"
-                                  :options="$list_jenis_kelamin"
-                                  class="select2"
-                        />
-                    </x-form-group>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <x-form-group id="nik" caption="NIK">
+                                <x-input name="nik" :value="$member->nik ?? ''" />
+                            </x-form-group>
+                        </div>
+                        <div class="col-md-6">
+                            <x-form-group id="no_member" caption="No.Member">
+                                <x-input name="no_member" :value="$no_member ?? ''" />
+                            </x-form-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <x-form-group id="notelp" caption="No.Telp">
+                                <x-input name="notelp" :value="$member->notelp ?? ''" />
+                            </x-form-group>
+                        </div>
+                        <div class="col-md-6">
+                            <x-form-group id="jenis_kelamin" caption="Jenis Kelamin">
+                                <x-select name="jenis_kelamin"
+                                          :value="$member->jenis_kelamin ?? ''"
+                                          :options="$list_jenis_kelamin"
+                                          class="select2"
+                                />
+                            </x-form-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <x-form-group id="tempat_lahir" caption="Tempat Lahir">
+                                <x-input name="tempat_lahir" :value="$member->tempat_lahir ?? ''" />
+                            </x-form-group>
+                        </div>
+                        <div class="col-md-6">
+                            <x-form-group id="tanggal_lahir" caption="Tanggal Lahir">
+                                <x-input name="tanggal_lahir" class="datepicker" :value="format_date($member->tanggal_lahir ?? '')" />
+                            </x-form-group>
+                        </div>
+                    </div>
                     <x-form-group id="alamat" caption="Alamat">
                         <x-input name="alamat" :value="$member->alamat ?? ''" />
                     </x-form-group>
@@ -32,6 +59,19 @@
                     @if(!empty($member))
                         <button class="btn btn-danger float-right" type="button" onclick="delete_member({{ $member->id }})">Delete</button>
                     @endif
+                </div>
+                <div class="col-md-3">
+                    <x-form-group id="file" caption="Foto">
+                        <x-input
+                            type="file"
+                            name="file"
+                            class="dropify"
+                            accept="image/jpeg, image/png"
+                            data-height="400"
+                            data-allowed-file-extensions="png jpg jpeg"
+                            :data-default-file="(($member->foto ?? '') != '') ? asset('assets/'.$member->foto) : ''"
+                        />
+                    </x-form-group>
                 </div>
             </div>
         </form>

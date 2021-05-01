@@ -20,6 +20,10 @@ class SimpananRepositories extends Repository {
             ->with(['member', 'jenis_simpanan'])
             ->latest();
 
+        $member_id = $request->input('member_id') ?? '';
+        if ($member_id != '')
+            $simpanan = $simpanan->where('member_id', $member_id);
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $simpanan->paginate($paginate);
         return $simpanan->get();

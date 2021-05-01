@@ -14,5 +14,9 @@ class Member extends Model
         'jenis_kelamin',
         'alamat',
         'notelp',
+        'foto',
+        'no_member',
+        'tempat_lahir',
+        'tanggal_lahir'
     ];
 }

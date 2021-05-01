@@ -30,8 +30,12 @@
         let $simpanan_info = $('#simpanan_info'),
             $simpanan_table = $('#simpanan_table');
 
-        search_simpanan = () => {
-            $.post("{{ route('admin.simpanan.search') }}", {_token, paginate}, (result) => {
+        let selected_page = 1;
+        search_simpanan = (page = 1) => {
+            if (page.toString() === '+1') selected_page++;
+            else if (page.toString() === '-1') selected_page--;
+            else selected_page = page;
+            $.post("{{ route('admin.simpanan.search') }}?page=" + selected_page, {_token, paginate}, (result) => {
                 $simpanan_table.html(result);
             }).fail((xhr) => {
                 $simpanan_table.html(xhr.responseText);
