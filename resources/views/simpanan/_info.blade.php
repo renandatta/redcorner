@@ -10,7 +10,7 @@
                 <div class="col-md-4">
                     <x-form-group id="member_id" caption="Member">
                         <x-select name="member_id"
-                                  :value="$simpanan->member_id ?? ''"
+                                  :value="$simpanan->member_id ?? $member_id"
                                   :options="$list_member"
                                   class="select2"
                         />
@@ -26,7 +26,7 @@
                         <x-input name="no_simpanan" :value="$no_simpanan ?? ''" />
                     </x-form-group>
                     <x-form-group id="tanggal" caption="Tanggal">
-                        <x-input name="tanggal" :value="$simpanan->tanggal ?? ''" class="datepicker" />
+                        <x-input name="tanggal" :value="$simpanan->tanggal ?? ''" class="datepicker" autocomplete="off" />
                     </x-form-group>
                     <x-form-group id="nominal" caption="Nominal">
                         <x-input name="nominal" :value="$simpanan->nominal ?? ''" class="autonumeric text-right" />
@@ -59,7 +59,8 @@
             cache: false,
             processData: false,
             contentType: false,
-            success: function() {
+            success: function(result) {
+                simpanan_info('', result.member_id);
                 init_simpanan();
             },
         }).fail((xhr) => {

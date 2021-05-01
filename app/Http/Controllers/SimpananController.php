@@ -38,12 +38,15 @@ class SimpananController extends Controller
     {
         $simpanan = $this->simpanan->find($request->input('id'));
         $no_simpanan = !empty($simpanan) ? $simpanan->no_simpanan : $this->simpanan->auto_number();
-        return view('simpanan._info', compact('simpanan', 'no_simpanan'));
+        $member_id = $request->input('member_id') ?? '';
+        return view('simpanan._info', compact('simpanan', 'no_simpanan', 'member_id'));
     }
 
     public function save(SimpananSaveRequest $request)
     {
-        return $this->simpanan->save($request);
+        $simpanan = $this->simpanan->save($request);
+        $simpanan->nomor_baru = $this->simpanan->auto_number();
+        return $simpanan;
     }
 
     public function delete(DeleteRequest $request)
@@ -55,5 +58,12 @@ class SimpananController extends Controller
     {
         $riwayat = $this->simpanan->search($request);
         return view('simpanan._riwayat', compact('riwayat'));
+    }
+
+    public function cetak(Request $request)
+    {
+        $simpanan = $this->simpanan->search($request);
+        if (count($simpanan) == 0) return redirect()->route('admin.simpanan');
+        return view('simpanan.cetak', compact('simpanan'));
     }
 }

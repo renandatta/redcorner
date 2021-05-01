@@ -6,8 +6,8 @@
         <th>Jenis Simpanan</th>
         <th>No.Simpanan</th>
         <th>Tanggal</th>
-        <th>Nominal</th>
-        <th width="10%"></th>
+        <th class="text-right">Nominal</th>
+        <th width="5%"></th>
     </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
                 <td class="text-nowrap">{{ $value->jenis_simpanan->nama }}</td>
                 <td class="text-nowrap">{{ $value->no_simpanan }}</td>
                 <td class="text-nowrap">{{ format_date($value->tanggal) }}</td>
-                <td class="text-nowrap">{{ format_number($value->nominal) }}</td>
+                <td class="text-nowrap text-right">{{ format_number($value->nominal) }}</td>
                 <td class="py-1 vertical-middle text-center">
                     <button class="btn btn-info py-1 px-2" type="button" onclick="simpanan_info({{ $value->id }})">
                         <i class="mdi mdi-arrow-right text-white"></i>

@@ -54,7 +54,6 @@ class SimpananRepositories extends Repository {
     public function auto_number()
     {
         $last = $this->simpanan
-            ->where('tanggal', 'like', date('Y').'-%')
             ->orderBy('no_simpanan', 'desc')
             ->first();
         $last_no = empty($last) ? 1 : intval($last->no_simpanan)+1;

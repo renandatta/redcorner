@@ -127,5 +127,17 @@ Route::prefix('admin')->group(function () {
         Route::post('delete', [SimpananController::class, 'delete'])->name('admin.simpanan.delete');
 
         Route::post('riwayat/anggota', [SimpananController::class, 'riwayat_anggota'])->name('admin.simpanan.riwayat.anggota');
+        Route::get('cetak', [SimpananController::class, 'cetak'])->name('admin.simpanan.cetak');
     });
+});
+
+Route::get('generate', function (\App\Repositories\SimpananRepositories $simpanan) {
+    \App\Models\Simpanan::where('no_simpanan', '<>', '0000000001')->update(['no_simpanan' => '0000000001']);
+    $data = \App\Models\Simpanan::orderBy('id', 'asc')->get();
+    foreach ($data as $key => $value) {
+        if ($key > 0) {
+            $nomor = $simpanan->auto_number();
+            \App\Models\Simpanan::find($value->id)->update(['no_simpanan' => $nomor]);
+        }
+    }
 });
