@@ -9,6 +9,7 @@ $fitur_program = array(
     ['url' => 'admin.member', 'caption' => 'Member', 'icon' => 'user'],
     ['url' => 'admin.jenis_simpanan', 'caption' => 'Jenis Simpanan', 'icon' => 'tag'],
     ['url' => 'admin.simpanan', 'caption' => 'Simpanan', 'icon' => 'shield'],
+    ['url' => 'admin.pinjaman', 'caption' => 'Pinjaman', 'icon' => 'shield'],
 );
 $menu_active = function($route) {
     $menu_active = Session::get('menu_active') ?? '';

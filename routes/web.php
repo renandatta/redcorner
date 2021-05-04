@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisSimpananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PinjamanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SimpananController;
@@ -129,15 +130,30 @@ Route::prefix('admin')->group(function () {
         Route::post('riwayat/anggota', [SimpananController::class, 'riwayat_anggota'])->name('admin.simpanan.riwayat.anggota');
         Route::get('cetak', [SimpananController::class, 'cetak'])->name('admin.simpanan.cetak');
     });
-});
 
-Route::get('generate', function (\App\Repositories\SimpananRepositories $simpanan) {
-    \App\Models\Simpanan::where('no_simpanan', '<>', '0000000001')->update(['no_simpanan' => '0000000001']);
-    $data = \App\Models\Simpanan::orderBy('id', 'asc')->get();
-    foreach ($data as $key => $value) {
-        if ($key > 0) {
-            $nomor = $simpanan->auto_number();
-            \App\Models\Simpanan::find($value->id)->update(['no_simpanan' => $nomor]);
-        }
-    }
+    Route::prefix('pinjaman')->group(function () {
+        Route::get('/', [PinjamanController::class, 'index'])->name('admin.pinjaman');
+        Route::post('search', [PinjamanController::class, 'search'])->name('admin.pinjaman.search');
+        Route::post('info', [PinjamanController::class, 'info'])->name('admin.pinjaman.info');
+        Route::post('save', [PinjamanController::class, 'save'])->name('admin.pinjaman.save');
+        Route::post('delete', [PinjamanController::class, 'delete'])->name('admin.pinjaman.delete');
+
+        Route::post('pembayaran', [PinjamanController::class, 'pembayaran'])->name('admin.pinjaman.pembayaran');
+        Route::post('pembayaran/search', [PinjamanController::class, 'pembayaran_search'])->name('admin.pinjaman.pembayaran.search');
+        Route::post('pembayaran/save', [PinjamanController::class, 'pembayaran_save'])->name('admin.pinjaman.pembayaran.save');
+        Route::post('pembayaran/delete', [PinjamanController::class, 'pembayaran_delete'])->name('admin.pinjaman.pembayaran.delete');
+
+        Route::get('cetak', [PinjamanController::class, 'cetak'])->name('admin.pinjaman.cetak');
+    });
 });
+//
+//Route::get('generate', function (\App\Repositories\SimpananRepositories $simpanan) {
+//    \App\Models\Simpanan::where('no_simpanan', '<>', '0000000001')->update(['no_simpanan' => '0000000001']);
+//    $data = \App\Models\Simpanan::orderBy('id', 'asc')->get();
+//    foreach ($data as $key => $value) {
+//        if ($key > 0) {
+//            $nomor = $simpanan->auto_number();
+//            \App\Models\Simpanan::find($value->id)->update(['no_simpanan' => $nomor]);
+//        }
+//    }
+//});
