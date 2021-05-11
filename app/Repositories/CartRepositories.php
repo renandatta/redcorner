@@ -23,6 +23,9 @@ class CartRepositories extends Repository {
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $cart->paginate($paginate);
+
+        $count = $request->input('count') ?? null;
+        if ($count != null) return $cart->count();
         return $cart->get();
     }
 

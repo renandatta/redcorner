@@ -52,6 +52,7 @@ Route::prefix('wishlist')->middleware(['auth'])->group(function () {
 
 Route::prefix('cart')->middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'cart'])->name('cart');
+    Route::post('count', [HomeController::class, 'cart_count'])->name('cart.count');
     Route::post('minimal', [HomeController::class, 'cart_minimal'])->name('cart.minimal');
     Route::post('save', [HomeController::class, 'cart_save'])->name('cart.save');
     Route::post('delete', [HomeController::class, 'cart_delete'])->name('cart.delete');

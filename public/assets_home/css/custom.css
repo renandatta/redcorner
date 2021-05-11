@@ -60,6 +60,7 @@
 .shopcart-description .content-wrap ul {
     max-height: none;
     height: 300px;
+    width: 400px;
 }
 .block-minicart .moorabi-submenu {
     max-width: 400px;

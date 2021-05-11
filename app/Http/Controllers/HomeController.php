@@ -118,6 +118,14 @@ class HomeController extends Controller
         return view('home.cart', compact('cart'));
     }
 
+    public function cart_count()
+    {
+        return $this->cart->search(new Request([
+            'user_id' => Auth::user()->id,
+            'count' => 1
+        ]));
+    }
+
     public function cart_minimal()
     {
         $cart = $this->cart->search(new Request([

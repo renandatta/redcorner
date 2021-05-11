@@ -159,7 +159,7 @@
             <a href="{{ route('cart') }}">
                 <span class="icon">
                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    <span class="count-icon">0</span>
+                    <span class="count-icon" id="cart_count">0</span>
                 </span>
                 <span class="text">Cart</span>
             </a>
@@ -220,13 +220,23 @@
             $list_cart.html(result);
         });
     }
+    cart_count = () => {
+        let $cart_count = $('#cart_count');
+        $.post("{{ route('cart.count') }}", {
+            _token: '{{ csrf_token() }}'
+        }, (result) => {
+            $cart_count.html(add_commas(result));
+        });
+    }
     cart_minimalist();
+    cart_count();
     add_cart = (produk_id, qty = '') => {
         @auth
         $.post("{{ route('cart.save') }}", {
             _token: '{{ csrf_token() }}', produk_id, qty
         }, () => {
             cart_minimalist();
+            cart_count();
         }).fail((xhr) => {
             console.log(xhr.responseText);
         });
