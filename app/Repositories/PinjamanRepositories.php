@@ -23,6 +23,9 @@ class PinjamanRepositories extends Repository {
         if ($member_id != '')
             $pinjaman = $pinjaman->where('member_id', $member_id);
 
+        $select = $request->input('select') ?? '';
+        if ($select != '') $pinjaman = $pinjaman->select($select);
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $pinjaman->paginate($paginate);
         return $pinjaman->get();

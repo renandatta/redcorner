@@ -23,6 +23,9 @@ class PembayaranPinjamanRepositories extends Repository {
         if ($pinjaman_id != '')
             $pembayaranPinjaman = $pembayaranPinjaman->where('pinjaman_id', $pinjaman_id);
 
+        $select = $request->input('select') ?? '';
+        if ($select != '') $pembayaranPinjaman = $pembayaranPinjaman->select($select);
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $pembayaranPinjaman->paginate($paginate);
         return $pembayaranPinjaman->get();

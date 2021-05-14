@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisSimpananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\PinjamanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
@@ -145,6 +146,11 @@ Route::prefix('admin')->group(function () {
         Route::post('pembayaran/delete', [PinjamanController::class, 'pembayaran_delete'])->name('admin.pinjaman.pembayaran.delete');
 
         Route::get('cetak', [PinjamanController::class, 'cetak'])->name('admin.pinjaman.cetak');
+    });
+
+    Route::prefix('neraca')->group(function () {
+        Route::get('/', [NeracaController::class, 'index'])->name('admin.neraca');
+        Route::post('search', [NeracaController::class, 'search'])->name('admin.neraca.search');
     });
 });
 //

@@ -24,6 +24,9 @@ class SimpananRepositories extends Repository {
         if ($member_id != '')
             $simpanan = $simpanan->where('member_id', $member_id);
 
+        $select = $request->input('select') ?? '';
+        if ($select != '') $simpanan = $simpanan->select($select);
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $simpanan->paginate($paginate);
         return $simpanan->get();
