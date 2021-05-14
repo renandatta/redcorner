@@ -6,12 +6,23 @@
         <div class="header-user-form-tabs">
             @auth
                 @php($user = \Illuminate\Support\Facades\Auth::user())
-                <div class="text-center">
-                    <h5 class="text-center pt-3">{{ $user->nama }}</h5>
-                    <a href="{{ route('wishlist') }}" class="button py-2">Wishlist</a>
-                    <a href="{{ route('logout') }}" class="button py-2">Logout</a>
-                    <br><br>
-                </div>
+                <ul class="list-group text-right" style="margin-bottom: 0;">
+                    <li class="list-group-item text-center">
+                        <h5 style="margin-bottom: 1rem;margin-top: 1rem">{{ $user->nama }}</h5>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('alamat') }}">Alamat</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('transaksi') }}">Riwayat Transaksi</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('wishlist') }}">Wishlist</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{ route('logout') }}">Logout</a>
+                    </li>
+                </ul>
             @endauth
             @guest
                 <ul class="tab-link">

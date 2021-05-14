@@ -2,16 +2,18 @@
 
 namespace App\Repositories;
 
+use App\Models\AlamatUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepositories {
 
-    protected $user;
-    public function __construct(User $user)
+    protected $user, $alamat;
+    public function __construct(User $user, AlamatUser $alamat)
     {
         $this->user = $user;
+        $this->alamat = $alamat;
     }
 
     public function search(Request $request)
@@ -50,6 +52,23 @@ class UserRepositories {
         $result = array();
         foreach (User::ROLES as $value) $result[$value] = $value;
         return $result;
+    }
+
+    public function alamat($user_id)
+    {
+        return $this->alamat->where('user_id', $user_id)->first();
+    }
+
+    public function save_alamat(Request $request)
+    {
+        return $this->alamat->updateOrCreate([
+            'user_id' => $request->input('user_id')
+        ], [
+            'alamat' => $request->input('alamat'),
+            'kodepos' => $request->input('kodepos'),
+            'nama_penerima' => $request->input('nama_penerima'),
+            'notelp' => $request->input('notelp')
+        ]);
     }
 
 }

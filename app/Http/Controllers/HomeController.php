@@ -6,24 +6,30 @@ use App\Repositories\CartRepositories;
 use App\Repositories\KategoriRepositories;
 use App\Repositories\ProdukRepositories;
 use App\Repositories\RuanganRepositories;
+use App\Repositories\TransaksiRepositories;
+use App\Repositories\UserRepositories;
 use App\Repositories\WishlistRepositories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    protected $kategori, $ruangan, $produk, $wishlist, $cart;
+    protected $kategori, $ruangan, $produk, $wishlist, $cart, $user, $transaksi;
     public function __construct(KategoriRepositories $kategori,
                                 RuanganRepositories $ruangan,
                                 ProdukRepositories $produk,
                                 WishlistRepositories $wishlist,
-                                CartRepositories $cart)
+                                CartRepositories $cart,
+                                UserRepositories $user,
+                                TransaksiRepositories $transaksi)
     {
         $this->kategori = $kategori;
         $this->ruangan = $ruangan;
         $this->produk = $produk;
         $this->wishlist = $wishlist;
         $this->cart = $cart;
+        $this->user = $user;
+        $this->transaksi = $transaksi;
         view()->share(['list_kategori' => $kategori->dropdown(true)]);
     }
 
@@ -147,5 +153,61 @@ class HomeController extends Controller
     public function cart_delete(Request $request)
     {
         return $this->cart->delete($request->input('id'));
+    }
+
+    public function alamat()
+    {
+        $alamat = $this->user->alamat(Auth::user()->id);
+        return view('home.alamat', compact('alamat'));
+    }
+
+    public function alamat_save(Request $request)
+    {
+        $request->merge(['user_id' => Auth::user()->id]);
+        $this->user->save_alamat($request);
+        return redirect()->route('alamat')
+            ->with('success', 'Alamat berhasil disimpan');
+    }
+
+    public function checkout()
+    {
+        $cart = $this->cart->search(new Request([
+            'user_id' => Auth::user()->id
+        ]));
+        $alamat = $this->user->alamat(Auth::user()->id);
+        return view('home.checkout', compact('cart', 'alamat'));
+    }
+
+    public function checkout_save(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $request->merge(['user_id' => $user_id]);
+        $request->merge(['status' => 'Menunggu Validasi Toko']);
+        $request->merge(['tanggal' => date('Y-m-d')]);
+
+        $alamat = $this->user->save_alamat($request);
+        $request->merge(['alamat_pengiriman' => $alamat->alamat]);
+        $this->transaksi->save($request);
+        return redirect()->route('transaksi');
+    }
+
+    public function transaksi()
+    {
+        $transaksi = $this->transaksi->transaksi(Auth::user()->id);
+        return view('home.transaksi', compact('transaksi'));
+    }
+
+    public function transaksi_detail($no_transaksi)
+    {
+        $transaksi = $this->transaksi->find($no_transaksi, 'no_transaksi');
+        return view('home.transaksi_detail', compact('transaksi'));
+    }
+
+    public function transaksi_save(Request $request)
+    {
+        $filename = $this->save_file($request, 'bukti_transfer');
+        if ($filename != '') $request->merge(['file_bukti' => $filename]);
+        $transaksi = $this->transaksi->save($request);
+        return redirect()->route('transaksi.detail', $transaksi->no_transaksi);
     }
 }

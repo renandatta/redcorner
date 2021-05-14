@@ -29,8 +29,16 @@
         <tr>
             <td>3</td>
             <td>Pembayaran Pinjaman</td>
-            <td></td>
             <td class="text-right text-nowrap">{{ format_number($pembayaran->sum('total_nominal')) }}</td>
+            <td></td>
+            <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
+        </tr>
+        @php($saldo = $saldo + $transaksi->sum('total_nominal'))
+        <tr>
+            <td>3</td>
+            <td>Penjualan Produk</td>
+            <td class="text-right text-nowrap">{{ format_number($transaksi->sum('total_nominal')) }}</td>
+            <td></td>
             <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
         </tr>
         <tr>

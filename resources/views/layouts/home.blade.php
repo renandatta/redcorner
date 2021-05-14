@@ -198,7 +198,17 @@
 <script src="{{ asset('assets_home/js/owl.thumbs.min.js') }}"></script>
 <script src="{{ asset('assets_home/js/jquery.scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets_home/js/frontend-plugin.js') }}"></script>
+<script src="{{ asset('assets/js/autoNumeric.js') }}"></script>
 <script>
+    $('.autonumeric')
+        .attr('data-a-sep', '.')
+        .attr('data-a-dec',',')
+        .autoNumeric({
+            mDec: '0',
+            vMax:'9999999999999999999999999',
+            vMin: '-99999999999999999'
+        });
+
     add_wislist = (produk_id) => {
         @auth
         $.post("{{ route('wishlist.save') }}", {

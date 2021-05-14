@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlamatUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenisSimpananController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PinjamanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SimpananController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
@@ -50,6 +52,21 @@ Route::prefix('wishlist')->middleware(['auth'])->group(function () {
     Route::post('save', [HomeController::class, 'wishlist_save'])->name('wishlist.save');
     Route::post('delete', [HomeController::class, 'wishlist_delete'])->name('wishlist.delete');
 });
+
+Route::prefix('alamat')->middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'alamat'])->name('alamat');
+    Route::post('save', [HomeController::class, 'alamat_save'])->name('alamat.save');
+});
+Route::prefix('checkout')->middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'checkout'])->name('checkout');
+    Route::post('/', [HomeController::class, 'checkout_save'])->name('checkout.save');
+});
+Route::prefix('transaksi')->middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'transaksi'])->name('transaksi');
+    Route::get('{no_transaksi}', [HomeController::class, 'transaksi_detail'])->name('transaksi.detail');
+    Route::post('save', [HomeController::class, 'transaksi_save'])->name('transaksi.save');
+});
+
 
 Route::prefix('cart')->middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'cart'])->name('cart');
@@ -103,6 +120,13 @@ Route::prefix('admin')->group(function () {
         Route::post('save', [RuanganController::class, 'save'])->name('admin.ruangan.save');
         Route::post('delete', [RuanganController::class, 'delete'])->name('admin.ruangan.delete');
         Route::post('delete_gambar', [RuanganController::class, 'delete_gambar'])->name('admin.ruangan.delete_gambar');
+    });
+
+    Route::prefix('transaksi')->group(function () {
+        Route::get('/', [TransaksiController::class, 'index'])->name('admin.transaksi');
+        Route::post('search', [TransaksiController::class, 'search'])->name('admin.transaksi.search');
+        Route::post('info', [TransaksiController::class, 'info'])->name('admin.transaksi.info');
+        Route::post('save', [TransaksiController::class, 'save'])->name('admin.transaksi.save');
     });
 
     Route::prefix('member')->group(function () {

@@ -5,6 +5,7 @@ $fitur_program = array(
     ['url' => 'admin.user', 'caption' => 'User', 'icon' => 'user'],
     ['url' => 'admin.kategori', 'caption' => 'Kategori Produk', 'icon' => 'tag'],
     ['url' => 'admin.produk', 'caption' => 'Produk', 'icon' => 'box'],
+    ['url' => 'admin.transaksi', 'caption' => 'Transaksi', 'icon' => 'shopping-cart'],
     ['url' => 'admin.ruangan', 'caption' => 'Ruangan', 'icon' => 'home'],
     ['url' => 'admin.member', 'caption' => 'Member', 'icon' => 'user'],
     ['url' => 'admin.jenis_simpanan', 'caption' => 'Jenis Simpanan', 'icon' => 'tag'],

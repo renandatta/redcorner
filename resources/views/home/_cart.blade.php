@@ -36,7 +36,7 @@
                 <a class="button button-viewcart" href="{{ route('cart') }}">
                     <span>View Cart</span>
                 </a>
-                <a href="#" class="button button-checkout">
+                <a href="{{ route('checkout') }}" class="button button-checkout">
                     <span>Checkout</span>
                 </a>
             </div>
