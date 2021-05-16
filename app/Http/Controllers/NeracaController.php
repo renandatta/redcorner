@@ -39,7 +39,7 @@ class NeracaController extends Controller
         $pembayaran = $this->pembayaran->search(new Request([
             'select' => array(DB::raw('sum(nominal) as total_nominal'))
         ]));
-        $transaksi = $this->transaksi->search(new Request([
+        $laba_transaksi = $this->transaksi->search(new Request([
             'status' => 'Selesai',
             'select' => array(DB::raw('sum(harga_produk-harga_beli) as total_nominal'))
         ]));
@@ -48,7 +48,7 @@ class NeracaController extends Controller
             'select' => array(DB::raw('sum(diskon) as total_nominal'))
         ]));
         return view('neraca._table', compact(
-            'simpanan', 'pinjaman', 'pembayaran', 'transaksi', 'diskon_transaksi'
+            'simpanan', 'pinjaman', 'pembayaran', 'laba_transaksi', 'diskon_transaksi'
         ));
     }
 }
