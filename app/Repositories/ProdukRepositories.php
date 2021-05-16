@@ -52,7 +52,7 @@ class ProdukRepositories extends Repository {
 
     public function save(Request $request)
     {
-        $request = $this->clean_number($request, ['harga']);
+        $request = $this->clean_number($request, ['harga', 'harga_beli']);
         $produk = $this->produk->find($request->input('id'));
         if (empty($produk)) $produk = $this->produk->create($request->all());
         else $produk->update($request->all());

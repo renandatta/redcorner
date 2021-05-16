@@ -21,6 +21,9 @@
                     <x-form-group id="harga" caption="Harga">
                         <x-input name="harga" :value="$produk->harga ?? ''" class="autonumeric text-right" />
                     </x-form-group>
+                    <x-form-group id="harga_beli" caption="Harga Beli">
+                        <x-input name="harga_beli" :value="$produk->harga_beli ?? ''" class="autonumeric text-right" />
+                    </x-form-group>
                 </div>
                 <div class="col-md-6">
                     <x-form-group id="tag" caption="Tag">

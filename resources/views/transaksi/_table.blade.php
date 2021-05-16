@@ -8,6 +8,7 @@
         <th>List Produk</th>
         <th class="text-center">Status</th>
         <th class="text-right">Harga Produk</th>
+        <th class="text-right">Harga Beli</th>
         <th width="10%"></th>
     </tr>
     </thead>
@@ -26,6 +27,7 @@
             </td>
             <td class="text-nowrap text-center">{{ $value->status }}</td>
             <td class="text-nowrap text-right">{{ format_number($value->harga_produk) }}</td>
+            <td class="text-nowrap text-right">{{ format_number($value->harga_beli) }}</td>
             <td class="py-1 vertical-middle text-center">
                 <button class="btn btn-info py-1 px-2" type="button" onclick="transaksi_info({{ $value->id }})">
                     <i class="mdi mdi-arrow-right text-white"></i>

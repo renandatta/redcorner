@@ -14,7 +14,8 @@ class Produk extends Model
         'nama',
         'harga',
         'tag',
-        'keterangan'
+        'keterangan',
+        'harga_beli'
     ];
 
     public function setNamaAttribute($nama)
@@ -38,4 +39,9 @@ class Produk extends Model
         return $this->hasOne(Wishlist::class, 'produk_id', 'id')
             ->where('user_id', Auth::user()->id ?? '');
     }
+
+//    public function getLabaAttribute()
+//    {
+//        return $this->harga - ($this->harga_beli ?? $this->harga);
+//    }
 }

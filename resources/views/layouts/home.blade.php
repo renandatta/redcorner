@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('assets_home/fonts/flaticon/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets_home/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets_home/css/custom.css') }}">
+    <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
     @stack('styles')
 </head>
 <body class="home">
@@ -199,6 +200,7 @@
 <script src="{{ asset('assets_home/js/jquery.scrollbar.min.js') }}"></script>
 <script src="{{ asset('assets_home/js/frontend-plugin.js') }}"></script>
 <script src="{{ asset('assets/js/autoNumeric.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <script>
     $('.autonumeric')
         .attr('data-a-sep', '.')
@@ -214,7 +216,7 @@
         $.post("{{ route('wishlist.save') }}", {
             _token: '{{ csrf_token() }}', produk_id
         }, () => {
-
+            swal.fire('Berhasil ditambahkan ke wishlist');
         }).fail((xhr) => {
             console.log(xhr.responseText);
         });
@@ -245,6 +247,7 @@
         $.post("{{ route('cart.save') }}", {
             _token: '{{ csrf_token() }}', produk_id, qty
         }, () => {
+            swal.fire('Berhasil ditambahkan ke keranjang');
             cart_minimalist();
             cart_count();
         }).fail((xhr) => {

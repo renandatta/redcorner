@@ -36,9 +36,17 @@
         @php($saldo = $saldo + $transaksi->sum('total_nominal'))
         <tr>
             <td>3</td>
-            <td>Penjualan Produk</td>
+            <td>Laba Penjualan Produk</td>
             <td class="text-right text-nowrap">{{ format_number($transaksi->sum('total_nominal')) }}</td>
             <td></td>
+            <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
+        </tr>
+        @php($saldo = $saldo + $diskon_transaksi->sum('total_nominal'))
+        <tr>
+            <td>3</td>
+            <td>Diskon Penjualan Produk</td>
+            <td></td>
+            <td class="text-right text-nowrap">{{ format_number($diskon_transaksi->sum('total_nominal')) }}</td>
             <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
         </tr>
         <tr>

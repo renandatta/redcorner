@@ -79,11 +79,15 @@ class TransaksiRepositories extends Repository
                 'transaksi_id' => $transaksi_id,
                 'produk_id' => $item->produk_id,
                 'qty' => $item->qty,
-                'harga' => $item->produk->harga
+                'harga' => $item->produk->harga,
+                'harga_beli' => $item->produk->harga_beli
             ]);
         }
         $this->cart->where('user_id', $user_id)->delete();
-        $this->transaksi->where('id', $transaksi_id)->update(['harga_produk' => $cart->sum('total')]);
+        $this->transaksi->where('id', $transaksi_id)->update([
+            'harga_produk' => $cart->sum('total'),
+            'harga_beli' => $cart->sum('total_harga_beli')
+        ]);
     }
 
     public function auto_number()

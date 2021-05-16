@@ -15,7 +15,8 @@ class TransaksiDetail extends Model
         'transaksi_id',
         'produk_id',
         'qty',
-        'harga'
+        'harga',
+        'harga_beli',
     ];
 
     public function getTotalAttribute()

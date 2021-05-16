@@ -25,6 +25,7 @@ class Transaksi extends Model
         'rekening_nama',
         'nominal_transfer',
         'file_bukti',
+        'harga_beli'
     ];
 
     public function user()

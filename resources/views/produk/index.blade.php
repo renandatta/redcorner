@@ -48,9 +48,10 @@
         }
 
         let produk_info = (id = '') => {
-            console.log(id);
+            $('#button_info_' + id).html('<i class="fa fa-spinner fa-spin"></i>');
             $.post("{{ route('admin.produk.info') }}", {_token, id}, (result) => {
                 $produk_info.html(result);
+                $('#button_info_' + id).html('<i class="mdi mdi-arrow-right text-white"></i>');
             }).fail((xhr) => {
                 $produk_info.html(xhr.responseText);
             });
