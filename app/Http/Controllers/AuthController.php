@@ -36,6 +36,7 @@ class AuthController extends Controller
 
         if ($user->role == 'User') return redirect()->route('/');
         if ($user->role == 'Administrator') return redirect()->route('admin');
+        if ($user->role == 'Operator') return redirect()->route('admin');
     }
 
     public function register_proses(RegisterRequest $request)

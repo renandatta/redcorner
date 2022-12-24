@@ -28,6 +28,21 @@ class Pinjaman extends Model
         return $this->hasMany(PembayaranPinjaman::class);
     }
 
+    public function getBungaRupiah2Attribute()
+    {
+        return $this->nominal * ($this->bunga / 100);
+    }
+
+    public function getAngsuranAttribute()
+    {
+        return $this->nominal / $this->tenor;
+    }
+
+    public function getTotalAngsuranAttribute()
+    {
+        return $this->angsuran + $this->bunga_rupiah_2;
+    }
+
     public function getDibayarPokokAttribute()
     {
         return $this->pembayaran_pinjaman->sum('angsuran_pokok');

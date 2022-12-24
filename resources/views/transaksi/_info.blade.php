@@ -60,10 +60,10 @@
                         <x-input name="rekening_nama" :value="$transaksi->rekening_nama ?? ''" readonly />
                     </x-form-group>
                     <x-form-group id="nominal_transafer" caption="Nominal Transfer">
-                        <x-input name="nominal_transafer" :value="$transaksi->nominal_transfer ?? ''" readonly />
+                        <x-input name="nominal_transafer" class="autonumeric" :value="$transaksi->nominal_transfer ?? ''" readonly />
                     </x-form-group>
                     <x-form-group id="bukti_transfer" caption="Bukti Transfer">
-                        <img src="{{ asset('assets/' . $transaksi->file_bukti) }}" alt="" class="img-fluid">
+                        <img src="{{ asset('assets/' . ($transaksi->file_bukti ?? '')) }}" alt="" class="img-fluid">
                     </x-form-group>
                 </div>
                 <div class="col-12">

@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('title')
-    Meeting Room -
+    {{ $title }} -
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="site-main">
                         <h3 class="custom_blog_title">
-                            Meeting Room
+                            {{ $title }}
                         </h3>
                         <ul class="row list-products auto-clear equal-container product-grid">
                             @foreach($ruangan as $item)

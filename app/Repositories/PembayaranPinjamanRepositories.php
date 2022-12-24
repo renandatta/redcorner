@@ -23,8 +23,22 @@ class PembayaranPinjamanRepositories extends Repository {
         if ($pinjaman_id != '')
             $pembayaranPinjaman = $pembayaranPinjaman->where('pinjaman_id', $pinjaman_id);
 
+        $member_id = $request->input('member_id') ?? '';
+        if ($member_id != '')
+            $pembayaranPinjaman = $pembayaranPinjaman->whereHas('pinjaman', function ($pinjaman) use ($member_id) {
+                $pinjaman->where('member_id', $member_id);
+            });
+
         $select = $request->input('select') ?? '';
         if ($select != '') $pembayaranPinjaman = $pembayaranPinjaman->select($select);
+
+        $tanggal_awal = $request->input('tanggal_awal', '') ?? '';
+        if ($tanggal_awal !== '')
+            $pembayaranPinjaman = $pembayaranPinjaman->where('tanggal', '>=', unformat_date($tanggal_awal));
+
+        $tanggal_akhir = $request->input('tanggal_akhir', '') ?? '';
+        if ($tanggal_akhir !== '')
+            $pembayaranPinjaman = $pembayaranPinjaman->where('tanggal', '<=', unformat_date($tanggal_akhir));
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $pembayaranPinjaman->paginate($paginate);

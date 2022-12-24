@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <x-form-group id="bunga" caption="Bunga (%)">
-                                <x-input name="bunga" :value="$pinjaman->bunga ?? ''" class="autonumeric text-right" />
+                                <x-input name="bunga" :value="$pinjaman->bunga ?? ''" class="autonumeric-decimal text-right" />
                             </x-form-group>
                         </div>
                         <div class="col-md-6">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
+use App\Models\Produk;
 use App\Repositories\CartRepositories;
 use App\Repositories\KategoriRepositories;
 use App\Repositories\ProdukRepositories;
@@ -31,13 +33,27 @@ class HomeController extends Controller
         $this->user = $user;
         $this->transaksi = $transaksi;
         view()->share(['list_kategori' => $kategori->dropdown(true)]);
+        view()->share(['kategori_all' => $kategori->search(new Request())]);
     }
 
     public function index()
     {
-        $ruangan = $this->ruangan->ruangan_utama();
-        $produk = $this->produk->featured_produk();
-        return view('home.index', compact('ruangan', 'produk'));
+//        $ruangan = $this->ruangan->ruangan_utama();
+//        $produk = $this->produk->featured_produk();
+        $kategori = $this->kategori->search(new Request());
+        foreach ($kategori as $value) {
+            $value->produk = Produk::where('kategori_id', $value->id)->limit(20)->get();
+        }
+        return view('home.index', compact('kategori'));
+    }
+
+    public function kategori($slug)
+    {
+        $kategori = Kategori::where('slug', $slug)->first();
+        if (empty($kategori)) abort(404);
+        $title = $kategori->nama;
+        $ruangan = Produk::where('kategori_id', $kategori->id)->get();
+        return view('home.ruangan.index', compact('ruangan', 'title'));
     }
 
     public function ruangan(Request $request)

@@ -9,6 +9,7 @@ use App\Http\Controllers\JenisSimpananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\NeracaController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PinjamanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RuanganController;
@@ -32,8 +33,9 @@ Route::get('assets/{folder}/{filename}', function ($folder,$filename){
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('/');
-Route::get('sembako', [HomeController::class, 'sembako'])->name('sembako');
-Route::get('tumpeng', [HomeController::class, 'tumpeng'])->name('tumpeng');
+Route::get('kategori/{slug}', [HomeController::class, 'kategori'])->name('kategori');
+//Route::get('sembako', [HomeController::class, 'sembako'])->name('sembako');
+//Route::get('tumpeng', [HomeController::class, 'tumpeng'])->name('tumpeng');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -170,21 +172,50 @@ Route::prefix('admin')->group(function () {
         Route::post('pembayaran/delete', [PinjamanController::class, 'pembayaran_delete'])->name('admin.pinjaman.pembayaran.delete');
 
         Route::get('cetak', [PinjamanController::class, 'cetak'])->name('admin.pinjaman.cetak');
+        Route::get('cetak_pembayaran/{id}', [PinjamanController::class, 'cetak_pembayaran'])->name('admin.pinjaman.cetak_pembayaran');
+    });
+
+    Route::prefix('pembayaran')->group(function () {
+        Route::get('/', [PembayaranController::class, 'index'])->name('admin.pembayaran');
+        Route::get('cetak', [PembayaranController::class, 'cetak'])->name('admin.pembayaran.cetak');
+        Route::post('search', [PembayaranController::class, 'search'])->name('admin.pembayaran.search');
     });
 
     Route::prefix('neraca')->group(function () {
         Route::get('/', [NeracaController::class, 'index'])->name('admin.neraca');
         Route::post('search', [NeracaController::class, 'search'])->name('admin.neraca.search');
     });
+
+    Route::prefix('kasir')->group(function () {
+        Route::get('/', [App\Http\Controllers\KasirController::class, 'index'])->name('admin.kasir');
+        Route::get('info', [App\Http\Controllers\KasirController::class, 'info'])->name('admin.kasir.info');
+        Route::post('search', [App\Http\Controllers\KasirController::class, 'search'])->name('admin.kasir.search');
+        Route::post('save', [App\Http\Controllers\KasirController::class, 'save'])->name('admin.kasir.save');
+        Route::post('delete', [App\Http\Controllers\KasirController::class, 'delete'])->name('admin.kasir.delete');
+        Route::post('search_item', [App\Http\Controllers\KasirController::class, 'search_item'])->name('admin.kasir.search_item');
+        Route::post('save_item', [App\Http\Controllers\KasirController::class, 'save_item'])->name('admin.kasir.save_item');
+        Route::post('delete_item', [App\Http\Controllers\KasirController::class, 'delete_item'])->name('admin.kasir.delete_item');
+
+    });
+
+    Route::get('tagihan', [NeracaController::class, 'tagihan'])->name('admin.tagihan');
 });
-//
-//Route::get('generate', function (\App\Repositories\SimpananRepositories $simpanan) {
-//    \App\Models\Simpanan::where('no_simpanan', '<>', '0000000001')->update(['no_simpanan' => '0000000001']);
-//    $data = \App\Models\Simpanan::orderBy('id', 'asc')->get();
-//    foreach ($data as $key => $value) {
-//        if ($key > 0) {
-//            $nomor = $simpanan->auto_number();
-//            \App\Models\Simpanan::find($value->id)->update(['no_simpanan' => $nomor]);
-//        }
+
+Route::get('generate', function (\App\Repositories\SimpananRepositories $simpanan) {
+
+
+
+//    $data = \App\Models\Simpanan::select('member_id', \Illuminate\Support\Facades\DB::raw('sum(nominal) as jumlah'))
+//        ->where('jenis_simpanan_id', 4)
+//        ->groupBy('member_id')
+//        ->get();
+//    foreach ($data as $value) {
+//        \App\Models\Simpanan::create([
+//            'member_id' => $value->member_id,
+//            'jenis_simpanan_id' => 1,
+//            'no_simpanan' => $simpanan->auto_number(),
+//            'nominal' => $value->jumlah,
+//            'tanggal' => date('Y-m-d')
+//        ]);
 //    }
-//});
+});

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    const ROLES = array('Administrator', 'User');
+    const ROLES = array('Administrator', 'User', 'Operator');
     use HasFactory, Notifiable;
     protected $fillable = [
         'nama',

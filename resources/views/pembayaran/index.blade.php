@@ -1,24 +1,22 @@
 @extends('layouts.index')
 
 @section('title')
-    Pinjaman -
+    Pembayaran -
 @endsection
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">Pinjaman</h4>
+            <h4 class="mb-3 mb-md-0">Pembayaran</h4>
         </div>
         <div class="d-flex align-items-center flex-wrap text-nowrap">
-            <button type="button" class="btn btn-primary" onclick="pinjaman_info()">
-                Add New
-            </button>
+
         </div>
     </div>
-    <div id="pinjaman_info"></div>
+    <div id="pembayaran_info"></div>
     <div class="card">
         <div class="card-body">
-            <form id="pinjaman_search" class="mb-2">
+            <form id="pembayaran_search" class="mb-2">
                 @csrf
                 <div class="row">
                     <div class="col-md-2">
@@ -44,7 +42,7 @@
                     </div>
                 </div>
             </form>
-            <div id="pinjaman_table"></div>
+            <div id="pembayaran_table"></div>
         </div>
     </div>
 @endsection
@@ -55,58 +53,42 @@
 
         let _token = '{{ csrf_token() }}',
             paginate = 10;
-        let $pinjaman_info = $('#pinjaman_info'),
-            $pinjaman_table = $('#pinjaman_table'),
-            $pinjaman_search = $('#pinjaman_search');
+        let $pembayaran_info = $('#pembayaran_info'),
+            $pembayaran_table = $('#pembayaran_table'),
+            $pembayaran_search = $('#pembayaran_search');
 
         let selected_page = 1;
-        search_pinjaman = (page = 1) => {
+        search_pembayaran = (page = 1) => {
             if (page.toString() === '+1') selected_page++;
             else if (page.toString() === '-1') selected_page--;
             else selected_page = page;
 
-            let data = get_form_data($pinjaman_search);
+            let data = get_form_data($pembayaran_search);
             data.paginate = 10;
-            $.post("{{ route('admin.pinjaman.search') }}?page=" + selected_page, data, (result) => {
-                $pinjaman_table.html(result);
+            $.post("{{ route('admin.pembayaran.search') }}?page=" + selected_page, data, (result) => {
+                $pembayaran_table.html(result);
             }).fail((xhr) => {
-                $pinjaman_table.html(xhr.responseText);
+                $pembayaran_table.html(xhr.responseText);
             });
         }
 
-        init_pinjaman = () => {
-            $pinjaman_info.html('');
-            search_pinjaman(selected_page);
+        init_pembayaran = () => {
+            $pembayaran_info.html('');
+            search_pembayaran(selected_page);
         }
 
-        pinjaman_info = (id = '', member_id = '') => {
-            $.post("{{ route('admin.pinjaman.info') }}", {_token, id, member_id}, (result) => {
-                $pinjaman_info.html(result);
-            }).fail((xhr) => {
-                $pinjaman_info.html(xhr.responseText);
-            });
-        }
-
-        $pinjaman_search.submit((e) => {
+        $pembayaran_search.submit((e) => {
             e.preventDefault();
-            search_pinjaman(1);
+            search_pembayaran(1);
         });
 
-        init_pinjaman();
-
-        pembayaran = (pinjaman_id) =>{
-            $.post("{{ route('admin.pinjaman.pembayaran') }}", {_token, pinjaman_id}, (result) => {
-                $pinjaman_info.html(result);
-            }).fail((xhr) => {
-                $pinjaman_info.html(xhr.responseText);
-            });
-        }
+        init_pembayaran();
 
         cetak = () => {
-            let data = get_form_data($pinjaman_search);
+            let data = get_form_data($pembayaran_search);
             delete data._token;
             let params = $.param(data);
-            window.open("{{ route('admin.pinjaman.cetak') }}?" + params, '_blank');
+            window.open("{{ route('admin.pembayaran.cetak') }}?" + params, '_blank');
         }
     </script>
 @endpush

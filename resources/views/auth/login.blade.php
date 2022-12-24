@@ -48,6 +48,9 @@
                                                 Remember me
                                             </label>
                                         </div>
+                                        <a href="{{ asset('privacy_policy.pdf') }}">Kebijakan Privasi Mega Pay</a><br>
+                                        <a href="{{ asset('term_agreement.pdf') }}">Syarat dan Ketentuan Pelanggan</a>
+                                        <br>
                                         <div class="mt-3">
                                             <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0">Login</button>
                                             <a href="{{ route('register') }}" class="btn btn-outline-primary mr-2 mb-2 mb-md-0">Register</a>

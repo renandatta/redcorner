@@ -24,17 +24,20 @@
                 </div>
             </div>
         @endif
-        <div class="moorabi-tabs  default rows-space-40">
-            <div class="container">
-                <ul class="row list-products auto-clear equal-container product-grid">
-                    @foreach($produk as $item)
-                        <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
-                            @include('home.produk._item', ['item' => $item])
-                        </li>
-                    @endforeach
-                </ul>
+        @foreach($kategori as $value)
+            <div class="moorabi-tabs  default rows-space-40">
+                <div class="container">
+                    <h4>{{ $value->nama }}</h4>
+                    <ul class="row list-products auto-clear equal-container product-grid">
+                        @foreach($value->produk as $item)
+                            <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                @include('home.produk._item', ['item' => $item])
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 

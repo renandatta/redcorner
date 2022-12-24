@@ -6,13 +6,24 @@ $fitur_program = array(
     ['url' => 'admin.kategori', 'caption' => 'Kategori Produk', 'icon' => 'tag'],
     ['url' => 'admin.produk', 'caption' => 'Produk', 'icon' => 'box'],
     ['url' => 'admin.transaksi', 'caption' => 'Transaksi', 'icon' => 'shopping-cart'],
+    ['url' => 'admin.kasir', 'caption' => 'Kasir', 'icon' => 'shopping-cart'],
     ['url' => 'admin.ruangan', 'caption' => 'Ruangan', 'icon' => 'home'],
     ['url' => 'admin.member', 'caption' => 'Member', 'icon' => 'user'],
     ['url' => 'admin.jenis_simpanan', 'caption' => 'Jenis Simpanan', 'icon' => 'tag'],
     ['url' => 'admin.simpanan', 'caption' => 'Simpanan', 'icon' => 'shield'],
     ['url' => 'admin.pinjaman', 'caption' => 'Pinjaman', 'icon' => 'shield'],
+    ['url' => 'admin.pembayaran', 'caption' => 'Pembayaran', 'icon' => 'share'],
     ['url' => 'admin.neraca', 'caption' => 'Neraca', 'icon' => 'file'],
 );
+if (auth()->user()->role == 'Operator') {
+    $fitur_program = array(
+        ['url' => 'admin', 'caption' => 'Dashboard', 'icon' => 'home'],
+        ['url' => 'admin.kategori', 'caption' => 'Kategori Produk', 'icon' => 'tag'],
+        ['url' => 'admin.produk', 'caption' => 'Produk', 'icon' => 'box'],
+        ['url' => 'admin.transaksi', 'caption' => 'Transaksi', 'icon' => 'shopping-cart'],
+        ['url' => 'admin.ruangan', 'caption' => 'Ruangan', 'icon' => 'home'],
+    );
+}
 $menu_active = function($route) {
     $menu_active = Session::get('menu_active') ?? '';
     return $menu_active == $route ? ' active show ' : '';

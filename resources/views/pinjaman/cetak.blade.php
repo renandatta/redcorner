@@ -4,9 +4,6 @@
     <img src="{{ asset('logo_bpek.png') }}" alt="" style="height: 2cm;position: absolute;">
     <div class="container-fluid">
         <h4 class="text-center">LAPORAN PINJAMAN</h4>
-        <p class="text-right">Nama : <b>{{ $pinjaman[0]->member->nama }}</b></p>
-        <p class="text-right">No.Member : <b>{{ $pinjaman[0]->member->no_member }}</b></p>
-        <p class="text-right">No.Telp : <b>{{ $pinjaman[0]->member->notelp }}</b></p>
     </div>
     <div class="container-fluid mt-5 d-flex justify-content-center w-100">
         <div class="table-responsive w-100">
@@ -14,6 +11,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Nama</th>
                     <th>Tanggal</th>
                     <th class="text-right">Nominal</th>
                     <th class="text-right">Bunga</th>
@@ -25,16 +23,19 @@
                 </thead>
                 <tbody>
                 @foreach($pinjaman as $key => $value)
-                <tr class="text-right">
-                    <td class="text-left">{{ $key+1 }}</td>
-                    <td class="text-left">{{ format_date($value->tanggal) }}</td>
-                    <td>{{ format_number($value->nominal) }}</td>
-                    <td>{{ format_number($value->bunga_rupiah) }}</td>
-                    <td>{{ format_number($value->angsuran) }}</td>
-                    <td>{{ format_number($value->pembayaran_pinjaman->sum('angsuran_pokok')) }}</td>
-                    <td>{{ format_number($value->nominal-$value->pembayaran_pinjaman->sum('angsuran_pokok')) }}</td>
-                    <td>{{ format_number($value->bunga_rupiah*$value->pembayaran_pinjaman->count()) }}</td>
-                </tr>
+                @if($value->pembayaran_pinjaman->count() < $value->tenor)
+                    <tr class="text-right">
+                        <td class="text-left">{{ $key+1 }}</td>
+                        <td class="text-left">{{ $value->member->nama }}</td>
+                        <td class="text-left">{{ format_date($value->tanggal) }}</td>
+                        <td>{{ format_number($value->nominal) }}</td>
+                        <td>{{ format_number($value->bunga_rupiah2) }}</td>
+                        <td>{{ format_number($value->angsuran) }}</td>
+                        <td>{{ format_number($value->pembayaran_pinjaman->sum('angsuran_pokok')) }}</td>
+                        <td>{{ format_number($value->nominal-$value->pembayaran_pinjaman->sum('angsuran_pokok')) }}</td>
+                        <td>{{ format_number($value->bunga_rupiah2*$value->pembayaran_pinjaman->count()) }}</td>
+                    </tr>
+                @endif
                 @endforeach
                 </tbody>
             </table>

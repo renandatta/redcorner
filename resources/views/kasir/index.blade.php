@@ -1,34 +1,24 @@
 @extends('layouts.index')
 
 @section('title')
-    Transaksi -
+    Kasir -
 @endsection
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
         <div>
-            <h4 class="mb-3 mb-md-0">Transaksi</h4>
+            <h4 class="mb-3 mb-md-0">Kasir</h4>
         </div>
         <div class="d-flex align-items-center flex-wrap text-nowrap">
-{{--            <button type="button" class="btn btn-primary" onclick="transaksi_info()">--}}
-{{--                Add New--}}
-{{--            </button>--}}
+            <a type="button" class="btn btn-primary" href="{{ route('admin.kasir.info') }}">Transaksi Baru</a>
         </div>
     </div>
     <div id="transaksi_info"></div>
     <div class="card">
         <div class="card-body">
-            <form id="transaksi_search">
+            <form id="transaksi_search" style="display: none;">
                 @csrf
                 <div class="row">
-                    <div class="col-md-10">
-                        <select name="status" id="status" class="form-control select2">
-                            <option value="">Semua Status</option>
-                            @foreach($list_status as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-block btn-primary">Cari</button>
                     </div>
@@ -61,26 +51,23 @@
 
             let data = get_form_data($transaksi_search);
             data.paginate = 10;
-            $.post("{{ route('admin.transaksi.search') }}?page=" + selected_page, data, (result) => {
+            $.post("{{ route('admin.kasir.search') }}?page=" + selected_page, data, (result) => {
                 $transaksi_table.html(result);
             }).fail((xhr) => {
                 $transaksi_table.html(xhr.responseText);
             });
         }
 
-        init_transaksi = () => {
-            $transaksi_info.html('');
-            search_transaksi();
-        }
-
-        transaksi_info = (id = '') => {
-            $.post("{{ route('admin.transaksi.info') }}", {_token, id}, (result) => {
-                $transaksi_info.html(result);
+        delete_transaksi = (id) => {
+            $.post("{{ route('admin.kasir.delete') }}", {
+                _token, id
+            }, () => {
+                search_transaksi();
             }).fail((xhr) => {
-                $transaksi_info.html(xhr.responseText);
+                console.log(xhr.responseText);
             });
         }
 
-        init_transaksi();
+        search_transaksi();
     </script>
 @endpush

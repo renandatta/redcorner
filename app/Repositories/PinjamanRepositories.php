@@ -26,6 +26,14 @@ class PinjamanRepositories extends Repository {
         $select = $request->input('select') ?? '';
         if ($select != '') $pinjaman = $pinjaman->select($select);
 
+        $tanggal_awal = $request->input('tanggal_awal', '') ?? '';
+        if ($tanggal_awal !== '')
+            $pinjaman = $pinjaman->where('tanggal', '>=', unformat_date($tanggal_awal));
+
+        $tanggal_akhir = $request->input('tanggal_akhir', '') ?? '';
+        if ($tanggal_akhir !== '')
+            $pinjaman = $pinjaman->where('tanggal', '<=', unformat_date($tanggal_akhir));
+
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $pinjaman->paginate($paginate);
         return $pinjaman->get();

@@ -29,6 +29,6 @@ class Cart extends Model
 
     public function getTotalHargaBeliAttribute()
     {
-        return $this->produk->harga * $this->qty;
+        return $this->produk->harga_beli * $this->qty;
     }
 }

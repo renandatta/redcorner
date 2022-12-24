@@ -21,7 +21,7 @@ class PembayaranPinjaman extends Model
 
     public function getAngsuranPokokAttribute()
     {
-        $bunga_rupiah = $this->pinjaman->bunga_rupiah;
+        $bunga_rupiah = $this->pinjaman->bunga_rupiah2;
         return $this->nominal - $bunga_rupiah;
     }
 }

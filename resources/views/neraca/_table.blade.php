@@ -33,11 +33,19 @@
             <td></td>
             <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
         </tr>
-        @php($saldo = $saldo + $transaksi->sum('total_nominal'))
+        @php($saldo = $saldo + $bunga)
+        <tr>
+            <td>3</td>
+            <td>Bunga Pinjaman</td>
+            <td class="text-right text-nowrap">{{ format_number($bunga) }}</td>
+            <td></td>
+            <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
+        </tr>
+        @php($saldo = $saldo + $laba_transaksi->sum('total_nominal'))
         <tr>
             <td>3</td>
             <td>Laba Penjualan Produk</td>
-            <td class="text-right text-nowrap">{{ format_number($transaksi->sum('total_nominal')) }}</td>
+            <td class="text-right text-nowrap">{{ format_number($laba_transaksi->sum('total_nominal')) }}</td>
             <td></td>
             <td class="text-right text-nowrap">{{ format_number($saldo) }}</td>
         </tr>

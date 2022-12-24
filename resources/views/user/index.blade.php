@@ -30,8 +30,13 @@
         let $user_info = $('#user_info'),
             $user_table = $('#user_table');
 
-        search_user = () => {
-            $.post("{{ route('admin.user.search') }}", {_token, paginate}, (result) => {
+        let selected_page = 1;
+        search_user = (page = 1) => {
+            if (page.toString() === '+1') selected_page++;
+            else if (page.toString() === '-1') selected_page--;
+            else selected_page = page;
+
+            $.post("{{ route('admin.user.search') }}?page=" + selected_page, {_token, paginate}, (result) => {
                 $user_table.html(result);
             }).fail((xhr) => {
                 $user_table.html(xhr.responseText);

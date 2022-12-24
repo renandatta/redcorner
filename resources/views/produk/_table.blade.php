@@ -3,7 +3,9 @@
     <tr>
         <th width="5%">No</th>
         <th>Nama</th>
+        <th>Kode</th>
         <th>Kategori</th>
+        <th>Supplier</th>
         <th class="text-right">Harga</th>
         <th class="text-right">Harga Beli</th>
         <th>Gambar</th>
@@ -16,7 +18,9 @@
         <tr>
             <td>{{ $no++ }}</td>
             <td class="text-nowrap">{{ $value->nama }}</td>
+            <td class="text-nowrap">{{ $value->keterangan }}</td>
             <td class="text-nowrap">{{ $value->kategori->nama }}</td>
+            <td class="text-nowrap">{{ $value->supplier }}</td>
             <td class="text-nowrap text-right">{{ format_number($value->harga) }}</td>
             <td class="text-nowrap text-right">{{ format_number($value->harga_beli) }}</td>
             <td class="py-0 vertical-middle">

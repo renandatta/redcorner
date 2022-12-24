@@ -10,7 +10,7 @@ class UserRoleMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role != 'Administrator') return redirect()->route('/');
+        if (Auth::user()->role != 'Administrator' && Auth::user()->role != 'Operator') return redirect()->route('/');
         return $next($request);
     }
 }

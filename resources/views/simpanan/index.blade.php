@@ -21,7 +21,7 @@
             <form id="simpanan_search" class="mb-2">
                 @csrf
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <x-select
                             prefix="search"
                             name="member_id"
@@ -30,10 +30,10 @@
                             :options="$list_member"
                         />
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <button type="submit" class="btn btn-block btn-primary">Cari</button>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <button type="button" class="btn btn-block btn-success" onclick="cetak()">Cetak</button>
                     </div>
                 </div>

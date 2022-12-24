@@ -64,6 +64,47 @@ class SimpananController extends Controller
     {
         $simpanan = $this->simpanan->search($request);
         if (count($simpanan) == 0) return redirect()->route('admin.simpanan');
-        return view('simpanan.cetak', compact('simpanan'));
+
+        $terakhir = \App\Models\Simpanan::where('member_id', $request->input('member_id'))
+            ->where('jenis_simpanan_id', 4)
+            ->orderBy('tanggal', 'desc')
+            ->first();
+        $diff = 0;
+        $kurang_bayar = 0;
+        if (!empty($terakhir)) {
+            $date1 = strtotime($terakhir->tanggal);
+            $data2 = strtotime(date('Y-m-d'));
+
+            $year1 = date('Y', $date1);
+            $year2 = date('Y', $data2);
+
+            $month1 = date('m', $date1);
+            $month2 = date('m', $data2);
+
+            $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+            $kurang_bayar = $diff * $terakhir->nominal;
+        }
+
+        $terakhir2 = \App\Models\Simpanan::where('member_id', $request->input('member_id'))
+            ->where('jenis_simpanan_id', 2)
+            ->orderBy('tanggal', 'desc')
+            ->first();
+        $diff2 = 0;
+        $kurang_bayar2 = 0;
+        if (!empty($terakhir2)) {
+            $date1 = strtotime($terakhir2->tanggal);
+            $data2 = strtotime(date('Y-m-d'));
+
+            $year1 = date('Y', $date1);
+            $year2 = date('Y', $data2);
+
+            $month1 = date('m', $date1);
+            $month2 = date('m', $data2);
+
+            $diff2 = (($year2 - $year1) * 12) + ($month2 - $month1);
+            $kurang_bayar2 = $diff2 * $terakhir2->nominal;
+        }
+
+        return view('simpanan.cetak', compact('simpanan', 'diff', 'kurang_bayar', 'diff2', 'kurang_bayar2'));
     }
 }

@@ -7,7 +7,9 @@
     <div class="product-thumb">
         <div class="thumb-inner">
             <a href="{{ route('produk.detail', $item->slug) }}">
-                <img src="{{ asset('assets/' . $item->gambar[0]->file) }}" alt="img">
+                @if(count($item->gambar) > 0)
+                    <img src="{{ asset('assets/' . $item->gambar[0]->file) }}" alt="img">
+                @endif
             </a>
             <div class="thumb-group">
                 @if(empty($item->is_wishlist))

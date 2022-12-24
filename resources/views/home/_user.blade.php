@@ -43,6 +43,9 @@
                             <p class="form-row form-row-wide">
                                 <input type="password" class="input-text" name="password" placeholder="Password">
                             </p>
+                            <a href="{{ asset('privacy_policy.pdf') }}">Kebijakan Privasi Mega Pay</a><br>
+                            <a href="{{ asset('term_agreement.pdf') }}">Syarat dan Ketentuan Pelanggan</a>
+                            <br><br>
                             <p class="form-row">
                                 <label class="form-checkbox">
                                     <input type="checkbox" class="input-checkbox" name="remember">
@@ -65,6 +68,8 @@
                             <p class="form-row form-row-wide">
                                 <input type="password" name="password" class="input-text" placeholder="Password">
                             </p>
+                            <a href="{{ asset('privacy_policy.pdf') }}">Kebijakan Privasi Mega Pay</a>
+                            <br><br>
                             <p class="form-row">
                                 <button type="submit" class="button">Register</button>
                             </p>

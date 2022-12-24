@@ -29,8 +29,11 @@
                     <x-form-group id="tag" caption="Tag">
                         <x-input name="tag" :value="$produk->tag ?? ''" />
                     </x-form-group>
-                    <x-form-group id="keterangan" caption="Keterangan">
-                        <x-textarea name="keterangan" :value="$produk->keterangan ?? ''" rows="6" />
+                    <x-form-group id="supplier" caption="Supplier">
+                        <x-input name="supplier" :value="$produk->supplier ?? ''" />
+                    </x-form-group>
+                    <x-form-group id="keterangan" caption="Kode">
+                        <x-input name="keterangan" :value="$produk->keterangan ?? ''"  />
                     </x-form-group>
                 </div>
             </div>

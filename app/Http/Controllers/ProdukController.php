@@ -33,6 +33,7 @@ class ProdukController extends Controller
     public function info(Request $request)
     {
         $produk = $this->produk->find($request->input('id'));
+        if ($request->has('ajax')) return $produk;
         return view('produk._info', compact('produk'));
     }
 

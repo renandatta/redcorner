@@ -10,6 +10,12 @@
     </div>
     <div class="container-fluid mt-5 d-flex justify-content-center w-100">
         <div class="table-responsive w-100">
+            @if($kurang_bayar > 0)
+            <h5 class="mb-0">Simpanan Wajib yang Belum Dibayar : {{ format_number($kurang_bayar) }}</h5>
+            @endif
+                @if($kurang_bayar2 > 0)
+                    <h5 class="mb-0">Simpanan Wajib yang Belum Dibayar : {{ format_number($kurang_bayar2) }}</h5>
+                @endif
             <table class="table table-bordered">
                 <thead>
                 <tr>

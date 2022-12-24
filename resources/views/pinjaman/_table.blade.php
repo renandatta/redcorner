@@ -7,6 +7,7 @@
         <th>Tanggal</th>
         <th class="text-right">Nominal</th>
         <th class="text-right">Bunga</th>
+        <th class="text-right">Dibayar</th>
         <th width="5%"></th>
     </tr>
     </thead>
@@ -19,7 +20,8 @@
                 <td class="text-nowrap">{{ $value->no_pinjaman }}</td>
                 <td class="text-nowrap">{{ format_date($value->tanggal) }}</td>
                 <td class="text-nowrap text-right">{{ format_number($value->nominal) }}</td>
-                <td class="text-nowrap text-right">{{ format_number($value->bunga_rupiah) }} ({{ $value->bunga }}%)</td>
+                <td class="text-nowrap text-right">{{ format_number($value->bunga_rupiah2) }} ({{ $value->bunga }}%)</td>
+                <td class="text-nowrap text-right">{{ format_number($value->pembayaran_pinjaman->sum('nominal')) }}</td>
                 <td class="py-1 vertical-middle text-center text-nowrap">
                     <button class="btn btn-info py-1 px-2" type="button" onclick="pinjaman_info({{ $value->id }})">
                         <i class="mdi mdi-arrow-right text-white"></i>
@@ -27,6 +29,9 @@
                     <button class="btn btn-primary py-1 px-2" type="button" onclick="pembayaran({{ $value->id }})">
                         <i class="mdi mdi-cash text-white"></i>
                     </button>
+                    <a target="_blank" href="{{ route('admin.pinjaman.cetak_pembayaran', $value->id) }}" class="btn btn-success py-1 px-2" type="button">
+                        <i class="mdi mdi-printer text-white"></i>
+                    </a>
                 </td>
             </tr>
         @endforeach

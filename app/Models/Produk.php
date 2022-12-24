@@ -15,7 +15,8 @@ class Produk extends Model
         'harga',
         'tag',
         'keterangan',
-        'harga_beli'
+        'harga_beli',
+        'supplier'
     ];
 
     public function setNamaAttribute($nama)

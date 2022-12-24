@@ -82,7 +82,13 @@ class PinjamanController extends Controller
     public function cetak(Request $request)
     {
         $pinjaman = $this->pinjaman->search($request);
-        if (count($pinjaman) == 0) return redirect()->route('admin.pinjaman');
+
         return view('pinjaman.cetak', compact('pinjaman'));
+    }
+
+    public function cetak_pembayaran($id)
+    {
+        $pinjaman = $this->pinjaman->find($id);
+        return view('pinjaman.laporan_pembayaran', compact('pinjaman'));
     }
 }

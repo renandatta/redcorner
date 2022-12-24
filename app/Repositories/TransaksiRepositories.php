@@ -20,6 +20,7 @@ class TransaksiRepositories extends Repository
     public function search(Request $request)
     {
         $transaksi = $this->transaksi
+            ->whereNotNull('user_id')
             ->with(['user', 'detail'])
             ->orderBy('no_transaksi', 'asc');
 
@@ -28,6 +29,14 @@ class TransaksiRepositories extends Repository
 
         $select = $request->input('select') ?? '';
         if ($select != '') $transaksi = $transaksi->select($select);
+
+        $tanggal_awal = $request->input('tanggal_awal', '');
+        if ($tanggal_awal !== '')
+            $transaksi = $transaksi->where('tanggal', '>=', unformat_date($tanggal_awal));
+
+        $tanggal_akhir = $request->input('tanggal_akhir', '');
+        if ($tanggal_akhir !== '')
+            $transaksi = $transaksi->where('tanggal', '<=', unformat_date($tanggal_akhir));
 
         $paginate = $request->input('paginate') ?? null;
         if ($paginate != null) return $transaksi->paginate($paginate);

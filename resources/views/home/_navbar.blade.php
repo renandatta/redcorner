@@ -1,10 +1,6 @@
 @php
 $menus = array(
-    ['url' => '/', 'caption' => 'Home'],
-    ['url' => 'ruangan', 'caption' => 'Meeting Room'],
-    ['url' => 'produk', 'caption' => 'Produk'],
-    ['url' => 'sembako', 'caption' => 'Sembako'],
-    ['url' => 'tumpeng', 'caption' => 'Tumpeng'],
+    ['url' => '/', 'caption' => 'Home']
 );
 @endphp
 
@@ -14,6 +10,11 @@ $menus = array(
         <li class="menu-item ">
             <a href="{{ route($menu['url']) }}" class="moorabi-menu-item-title">{{ $menu['caption'] }}</a>
         </li>
+        @endforeach
+        @foreach ($kategori_all as $key => $value)
+                <li class="menu-item ">
+                    <a href="{{ route('kategori', $value->slug) }}" class="moorabi-menu-item-title">{{ $value->nama }}</a>
+                </li>
         @endforeach
     </ul>
 </div>

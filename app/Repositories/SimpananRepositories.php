@@ -24,6 +24,14 @@ class SimpananRepositories extends Repository {
         if ($member_id != '')
             $simpanan = $simpanan->where('member_id', $member_id);
 
+        $tanggal_awal = $request->input('tanggal_awal', '');
+        if ($tanggal_awal !== '')
+            $simpanan = $simpanan->where('tanggal', '>=', unformat_date($tanggal_awal));
+
+        $tanggal_akhir = $request->input('tanggal_akhir', '');
+        if ($tanggal_akhir !== '')
+            $simpanan = $simpanan->where('tanggal', '<=', unformat_date($tanggal_akhir));
+
         $select = $request->input('select') ?? '';
         if ($select != '') $simpanan = $simpanan->select($select);
 
